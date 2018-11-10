@@ -66,6 +66,7 @@ var managers;
             if (this._currentBulletIndex >= this._bullets.length) {
                 this._currentBulletIndex = 0;
             }
+            createjs.Sound.play("bulletSound", { volume: 0.1 });
         };
         return Bullet;
     }());

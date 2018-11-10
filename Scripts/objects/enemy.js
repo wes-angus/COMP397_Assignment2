@@ -16,11 +16,14 @@ var objects;
     var Enemy = /** @class */ (function (_super) {
         __extends(Enemy, _super);
         //constructor
-        function Enemy(health) {
+        function Enemy(health, shotDelay) {
             if (health === void 0) { health = 3; }
+            if (shotDelay === void 0) { shotDelay = 20; }
             var _this = _super.call(this, "enemy", true) || this;
+            _this._shootFrame = 0;
             _this.rotation = 180;
             _this._origHealth = health;
+            _this._shotDelay = shotDelay;
             _this.Start();
             return _this;
         }
@@ -57,8 +60,11 @@ var objects;
             if (this.x < -this.Width) {
                 this.Reset();
             }
-            if ((createjs.Ticker.getTicks() % 20 == 0) && (this.x < 720 + this.Height)) {
-                managers.Game.bulletManager.FireBullet(util.Vector2.Add(this.Position, this._bulletSpawn), util.Vector2.left());
+            if ((this.x < 720 + this.HalfHeight)) {
+                if (createjs.Ticker.getTicks() > this._shootFrame) {
+                    this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
+                    managers.Game.bulletManager.FireBullet(util.Vector2.Add(this.Position, this._bulletSpawn), util.Vector2.left());
+                }
             }
         };
         //public methods
@@ -69,7 +75,7 @@ var objects;
             this.Health = this._origHealth;
             this.IsColliding = false;
             this._updatePosition();
-            this.alpha = 255;
+            this.alpha = 1;
         };
         Enemy.prototype.Destroy = function () {
             managers.Game.scoreBoard.Score += 100;

@@ -5,6 +5,8 @@ module objects {
         private _bulletSpawn: util.Vector2;
         private _health: number;
         private _origHealth: number;
+        private _shootFrame: number = 0;
+        private _shotDelay: number;
 
         //public props
         get Health(): number {
@@ -18,10 +20,11 @@ module objects {
         }
 
         //constructor
-        constructor(health: number = 3) {
+        constructor(health: number = 3, shotDelay: number = 20) {
             super("enemy", true);
             this.rotation = 180;
             this._origHealth = health;
+            this._shotDelay = shotDelay;
 
             this.Start();
         }
@@ -46,11 +49,14 @@ module objects {
                 this.Reset();
             }
 
-            if ((createjs.Ticker.getTicks() % 20 == 0) && (this.x < 720 + this.Height)) {
-                managers.Game.bulletManager.FireBullet(
-                    util.Vector2.Add(this.Position, this._bulletSpawn),
-                    util.Vector2.left()
-                );
+            if ((this.x < 720 + this.HalfHeight)) {
+                if (createjs.Ticker.getTicks() > this._shootFrame) {
+                    this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
+                    managers.Game.bulletManager.FireBullet(
+                        util.Vector2.Add(this.Position, this._bulletSpawn),
+                        util.Vector2.left()
+                    );
+                }
             }
         }
 
@@ -62,7 +68,7 @@ module objects {
             this.Health = this._origHealth;
             this.IsColliding = false;
             this._updatePosition();
-            this.alpha = 255;
+            this.alpha = 1;
         }
         public Destroy(): void {
             managers.Game.scoreBoard.Score += 100;

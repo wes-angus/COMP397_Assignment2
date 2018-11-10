@@ -73,36 +73,6 @@ module objects {
 
         protected resolveCollision(other: GameObject): void {
             other.IsColliding = true;
-
-            switch (other.name) {
-                case "coin":
-                    createjs.Sound.play("coinSound", { volume: 0.1 });
-                    managers.Game.scoreBoard.Score += 50;
-                    other.Destroy();
-                    managers.Game.scoreBoard.Coins++;
-                    if (managers.Game.scoreBoard.Coins > 99) {
-                        managers.Game.scoreBoard.Lives++;
-                        managers.Game.scoreBoard.Coins = 0;
-                        createjs.Sound.play("lifeSound", { volume: 0.1 });
-                    }
-                    break;
-                case "enemy":
-                    createjs.Sound.play("explodeSound", { volume: 0.1 });
-                    managers.Game.scoreBoard.Lives--;
-                    break;
-                case "bullet":
-                    createjs.Sound.play("explodeSound", { volume: 0.1 });
-                    managers.Game.scoreBoard.Lives--;
-                    (<Bullet>other).IsInPlay = false;
-                    break;
-            }
-
-            if (managers.Game.scoreBoard.Lives < 1) {
-                managers.Game.curState = config.Scene.OVER;
-                if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
-                    managers.Game.scoreBoard.HighScore = managers.Game.scoreBoard.Score;
-                }
-            }
         }
 
         //Collision functions assume object checking against others (e.g. player) is centered

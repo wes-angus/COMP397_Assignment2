@@ -66,9 +66,10 @@ module managers {
             this.CurrentBullet.Direction = dir;
             this.CurrentBullet.IsInPlay = true;
             this._currentBulletIndex++;
-            if(this._currentBulletIndex >= this._bullets.length) {
+            if (this._currentBulletIndex >= this._bullets.length) {
                 this._currentBulletIndex = 0;
             }
+            createjs.Sound.play("bulletSound", { volume: 0.1 });
         }
     }
 }

@@ -30,7 +30,7 @@ module objects {
             this.x = 720 + this.Width;
             this.y = Math.floor(Math.random() * (480 - this.Height) + this.HalfHeight);
             this.IsColliding = false;
-            this.alpha = 255;
+            this.alpha = 1;
         }
         public Destroy(): void {
             this.alpha = 0;
