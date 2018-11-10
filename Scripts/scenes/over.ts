@@ -24,7 +24,10 @@ module scenes {
         }
         public Start(): void {
             this._ocean = new objects.Ocean();
-            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 360, 240, true);
+            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 360, 200, true);
+            if (managers.Game.scoreBoard.Win) {
+                this._gameOverLbl.text = "You Win!";
+            }
             this._restartBtn = new objects.Button("restartButton", 360, 360, true);
 
             this.Main();
@@ -35,7 +38,7 @@ module scenes {
             this.addChild(this._ocean);
             this.addChild(this._gameOverLbl);
             this.addChild(this._restartBtn);
-            
+
             this._restartBtn.on("click", () => {
                 managers.Game.curState = config.Scene.LEVEL1;
                 managers.Game.scoreBoard.Reset();

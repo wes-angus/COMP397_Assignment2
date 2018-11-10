@@ -38,11 +38,13 @@ module objects {
                     createjs.Sound.play("coinSound", { volume: 0.1 });
                     managers.Game.scoreBoard.Score += 50;
                     other.Destroy();
-                    managers.Game.scoreBoard.Coins++;
-                    if (managers.Game.scoreBoard.Coins > 99) {
+                    if (managers.Game.scoreBoard.Coins === 99) {
                         managers.Game.scoreBoard.Lives++;
                         managers.Game.scoreBoard.Coins = 0;
                         createjs.Sound.play("lifeSound", { volume: 0.1 });
+                    }
+                    else {
+                        managers.Game.scoreBoard.Coins++;
                     }
                     break;
                 case "enemy":
@@ -98,7 +100,7 @@ module objects {
                     managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Shoot])) {
                     managers.Game.bulletManager.FireBullet(
                         util.Vector2.Add(this.Position, this._bulletSpawn),
-                        util.Vector2.right()
+                        util.Vector2.right(), "player"
                     );
                     this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
                 }

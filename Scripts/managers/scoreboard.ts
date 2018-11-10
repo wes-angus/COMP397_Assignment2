@@ -5,11 +5,14 @@ module managers {
         private _lives: number;
         private _coins: number;
         private _highScore: number;
+        private _remainingEnemies: number;
+        private _win: boolean;
 
         private _scoreLabel: objects.Label;
         private _livesLabel: objects.Label;
         private _coinsLabel: objects.Label;
         private _highScoreLabel: objects.Label;
+        private _enemiesLabel: objects.Label;
 
         //public props
         get Score(): number {
@@ -44,6 +47,26 @@ module managers {
             this._highScoreLabel.text = "High Score: " + this._highScore;
         }
 
+        get RemainingEnemies(): number {
+            return this._remainingEnemies;
+        }
+        set RemainingEnemies(newVal: number) {
+            this._remainingEnemies = newVal;
+            this._enemiesLabel.text = "Remaining: " + this._remainingEnemies;
+            if (this._remainingEnemies < 1) {
+                managers.Game.scoreBoard.Score += 10000;
+                this._win = true;
+                managers.Game.curState = config.Scene.OVER;
+                if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
+                    managers.Game.scoreBoard.HighScore = managers.Game.scoreBoard.Score;
+                }
+            }
+        }
+
+        get Win(): boolean {
+            return this._win;
+        }
+
         //constructor
         constructor(livesNum: number = 5, scoreNum: number = 0, highScoreNum: number = 0) {
             this.Start();
@@ -52,6 +75,7 @@ module managers {
             this.Score = scoreNum;
             this.Coins = scoreNum;
             this.HighScore = highScoreNum;
+            this._remainingEnemies = 99;
         }
 
         //private methods
@@ -67,6 +91,7 @@ module managers {
             curScene.addChild(this._scoreLabel);
             curScene.addChild(this._livesLabel);
             curScene.addChild(this._coinsLabel);
+            curScene.addChild(this._enemiesLabel);
         }
 
         public AddHighScore(curScene: objects.Scene): void {
@@ -77,7 +102,8 @@ module managers {
             this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 250, 10, false);
             this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 20, 10, false);
             this._coinsLabel = new objects.Label("Coins: 99", "30px", "Consolas", "#FFFF00", 540, 10, false);
-            this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 360, 160, true);
+            this._enemiesLabel = new objects.Label("Remaining: 99", "30px", "Consolas", "#FFFF00", 300, 430, false);
+            this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 360, 120, true);
         }
     }
 }

@@ -20,6 +20,8 @@ var scenes;
         function Level1() {
             var _this = _super.call(this) || this;
             _this._coinCount = 3;
+            _this._startingEnemies = 20;
+            _this._enemyCount = 4;
             _this.Start();
             return _this;
         }
@@ -40,7 +42,7 @@ var scenes;
             //Coin array
             this._coins = [];
             //Enemy object
-            this._enemy = new objects.Enemy();
+            this._enemies = [];
             this._engineSound = createjs.Sound.play("engineSound", { volume: 0.067, loop: -1 });
             //Instantiate new bullet manager
             this._bulletManager = new managers.Bullet();
@@ -61,25 +63,42 @@ var scenes;
                 coin.Update();
                 _this._player.checkIntersectionNotCentered(coin);
             });
-            this._enemy.Update();
-            this._player.checkIntersection(this._enemy);
+            if (this._enemies.length < this._enemyCount) {
+                if (createjs.Ticker.getTicks() % 120 === 0) {
+                    this._enemies.push(new objects.Enemy());
+                    this.addChild(this._enemies[this._enemies.length - 1]);
+                }
+            }
+            this._enemies.forEach(function (enemy) {
+                enemy.Update();
+                _this._player.checkIntersectionNotCentered(enemy);
+            });
             this._bulletManager.Update();
             this._bulletManager.Bullets.forEach(function (bullet) {
                 if (bullet.IsInPlay) {
-                    _this._player.checkIntersection(bullet);
-                    _this._enemy.checkIntersection(bullet);
+                    console.log(bullet.Owner);
+                    if (bullet.Owner === "enemy") {
+                        _this._player.checkIntersection(bullet);
+                    }
+                    else if (bullet.Owner === "player") {
+                        _this._enemies.forEach(function (enemy) {
+                            if (enemy.Health > 0) {
+                                enemy.checkIntersectionNotCentered(bullet);
+                            }
+                        });
+                    }
                 }
             });
         };
         Level1.prototype.Main = function () {
             var _this = this;
             this.addChild(this._ocean);
-            this.addChild(this._enemy);
             this.addChild(this._player);
             //Add each bullet in the array to the scene
             this._bulletManager.Bullets.forEach(function (bullet) {
                 _this.addChild(bullet);
             });
+            managers.Game.scoreBoard.RemainingEnemies = this._startingEnemies;
             managers.Game.scoreBoard.AddGameUI(this);
         };
         return Level1;

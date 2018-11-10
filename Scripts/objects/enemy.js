@@ -17,7 +17,7 @@ var objects;
         __extends(Enemy, _super);
         //constructor
         function Enemy(health, shotDelay) {
-            if (health === void 0) { health = 3; }
+            if (health === void 0) { health = 2; }
             if (shotDelay === void 0) { shotDelay = 20; }
             var _this = _super.call(this, "enemy", true) || this;
             _this._shootFrame = 0;
@@ -34,7 +34,7 @@ var objects;
             },
             set: function (newHealth) {
                 this._health = newHealth;
-                if (this._health < 1) {
+                if (this._health === 0) {
                     this.Destroy();
                 }
             },
@@ -63,14 +63,14 @@ var objects;
             if ((this.x < 720 + this.HalfHeight)) {
                 if (createjs.Ticker.getTicks() > this._shootFrame) {
                     this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
-                    managers.Game.bulletManager.FireBullet(util.Vector2.Add(this.Position, this._bulletSpawn), util.Vector2.left());
+                    managers.Game.bulletManager.FireBullet(util.Vector2.Add(this.Position, this._bulletSpawn), util.Vector2.left(), "enemy");
                 }
             }
         };
         //public methods
         Enemy.prototype.Reset = function () {
             this._horizontalSpeed = -(Math.floor(Math.random() * 2) + 6);
-            this.x = 720 + this.Width * Math.floor(Math.random() * 10) + 5;
+            this.x = 720 + this.Width * Math.floor(Math.random() * 5) + 5;
             this.y = Math.floor(Math.random() * (480 - this.Height) + this.HalfHeight);
             this.Health = this._origHealth;
             this.IsColliding = false;
@@ -78,7 +78,9 @@ var objects;
             this.alpha = 1;
         };
         Enemy.prototype.Destroy = function () {
+            console.log("Killed Enemy!");
             managers.Game.scoreBoard.Score += 100;
+            managers.Game.scoreBoard.RemainingEnemies--;
             this.IsColliding = true;
             this.alpha = 0;
         };

@@ -35,6 +35,12 @@ module managers {
         }
 
         //private methods
+        private _nextBullet() {
+            this._currentBulletIndex++;
+            if (this._currentBulletIndex >= this._bullets.length) {
+                this._currentBulletIndex = 0;
+            }
+        }
 
         //public methods
         public Start(): void {
@@ -59,17 +65,16 @@ module managers {
 
         }
 
-        public FireBullet(spawnPoint: util.Vector2, dir: util.Vector2): void {
+        public FireBullet(spawnPoint: util.Vector2, dir: util.Vector2, owner: string): void {
             this.CurrentBullet.Position = spawnPoint;
             this.CurrentBullet.x = spawnPoint.x;
             this.CurrentBullet.y = spawnPoint.y;
             this.CurrentBullet.Direction = dir;
             this.CurrentBullet.IsInPlay = true;
-            this._currentBulletIndex++;
-            if (this._currentBulletIndex >= this._bullets.length) {
-                this._currentBulletIndex = 0;
-            }
+            this.CurrentBullet.Owner = owner;
             createjs.Sound.play("bulletSound", { volume: 0.1 });
+
+            this._nextBullet();
         }
     }
 }

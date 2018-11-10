@@ -5,9 +5,11 @@ module scenes {
         private _player: objects.Player;
         private _ocean: objects.Ocean;
         private _coins: objects.Coin[];
-        private _enemy: objects.Enemy;
+        private _enemies: objects.Enemy[];
         private _engineSound: createjs.AbstractSoundInstance;
         private _coinCount = 3;
+        private _startingEnemies: number = 20;
+        private _enemyCount = 4;
 
         private _bulletManager: managers.Bullet;
 
@@ -43,7 +45,7 @@ module scenes {
             this._coins = [];
 
             //Enemy object
-            this._enemy = new objects.Enemy();
+            this._enemies = [];
 
             this._engineSound = createjs.Sound.play("engineSound", { volume: 0.067, loop: -1 });
 
@@ -57,39 +59,54 @@ module scenes {
         public Update(): void {
             this._ocean.Update();
             this._player.Update();
-            if(this._coins.length < this._coinCount)
-            {
-                if(createjs.Ticker.getTicks() % 60 === 0)
-                {
+            if (this._coins.length < this._coinCount) {
+                if (createjs.Ticker.getTicks() % 60 === 0) {
                     this._coins.push(new objects.Coin());
-                    this.addChild(this._coins[this._coins.length- 1]);
+                    this.addChild(this._coins[this._coins.length - 1]);
                 }
             }
             this._coins.forEach(coin => {
                 coin.Update();
                 this._player.checkIntersectionNotCentered(coin);
             });
-            this._enemy.Update();
-            this._player.checkIntersection(this._enemy);
+            if (this._enemies.length < this._enemyCount) {
+                if (createjs.Ticker.getTicks() % 120 === 0) {
+                    this._enemies.push(new objects.Enemy());
+                    this.addChild(this._enemies[this._enemies.length - 1]);
+                }
+            }
+            this._enemies.forEach(enemy => {
+                enemy.Update();
+                this._player.checkIntersectionNotCentered(enemy);
+            });
 
             this._bulletManager.Update();
             this._bulletManager.Bullets.forEach(bullet => {
                 if (bullet.IsInPlay) {
-                    this._player.checkIntersection(bullet);
-                    this._enemy.checkIntersection(bullet);
+                    console.log(bullet.Owner);
+                    if (bullet.Owner === "enemy") {
+                        this._player.checkIntersection(bullet);
+                    }
+                    else if (bullet.Owner === "player") {
+                        this._enemies.forEach(enemy => {
+                            if (enemy.Health > 0) {
+                                enemy.checkIntersectionNotCentered(bullet);
+                            }
+                        });
+                    }
                 }
             });
         }
 
         public Main(): void {
             this.addChild(this._ocean);
-            this.addChild(this._enemy);
             this.addChild(this._player);
             //Add each bullet in the array to the scene
             this._bulletManager.Bullets.forEach(bullet => {
                 this.addChild(bullet);
             });
 
+            managers.Game.scoreBoard.RemainingEnemies = this._startingEnemies;
             managers.Game.scoreBoard.AddGameUI(this);
         }
     }

@@ -14,13 +14,13 @@ module objects {
         }
         set Health(newHealth: number) {
             this._health = newHealth;
-            if (this._health < 1) {
+            if (this._health === 0) {
                 this.Destroy();
             }
         }
 
         //constructor
-        constructor(health: number = 3, shotDelay: number = 20) {
+        constructor(health: number = 2, shotDelay: number = 20) {
             super("enemy", true);
             this.rotation = 180;
             this._origHealth = health;
@@ -54,7 +54,7 @@ module objects {
                     this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
                     managers.Game.bulletManager.FireBullet(
                         util.Vector2.Add(this.Position, this._bulletSpawn),
-                        util.Vector2.left()
+                        util.Vector2.left(), "enemy"
                     );
                 }
             }
@@ -63,7 +63,7 @@ module objects {
         //public methods
         public Reset(): void {
             this._horizontalSpeed = -(Math.floor(Math.random() * 2) + 6);
-            this.x = 720 + this.Width * Math.floor(Math.random() * 10) + 5;
+            this.x = 720 + this.Width * Math.floor(Math.random() * 5) + 5;
             this.y = Math.floor(Math.random() * (480 - this.Height) + this.HalfHeight);
             this.Health = this._origHealth;
             this.IsColliding = false;
@@ -71,7 +71,9 @@ module objects {
             this.alpha = 1;
         }
         public Destroy(): void {
+            console.log("Killed Enemy!");
             managers.Game.scoreBoard.Score += 100;
+            managers.Game.scoreBoard.RemainingEnemies--;
             this.IsColliding = true;
             this.alpha = 0;
         }

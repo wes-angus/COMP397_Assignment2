@@ -45,6 +45,16 @@ var objects;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Bullet.prototype, "Owner", {
+            get: function () {
+                return this._owner;
+            },
+            set: function (newOwner) {
+                this._owner = newOwner;
+            },
+            enumerable: true,
+            configurable: true
+        });
         //private methods
         Bullet.prototype._move = function () {
             this._updatePosition();
@@ -60,6 +70,7 @@ var objects;
         };
         //public methods
         Bullet.prototype.Reset = function () {
+            this.Owner = "";
             this.x = -10000;
             this.y = -10000;
             this.Direction = util.Vector2.zero();

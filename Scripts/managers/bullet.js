@@ -39,6 +39,12 @@ var managers;
             configurable: true
         });
         //private methods
+        Bullet.prototype._nextBullet = function () {
+            this._currentBulletIndex++;
+            if (this._currentBulletIndex >= this._bullets.length) {
+                this._currentBulletIndex = 0;
+            }
+        };
         //public methods
         Bullet.prototype.Start = function () {
             //create the bullets array
@@ -56,17 +62,15 @@ var managers;
         };
         Bullet.prototype.Destroy = function () {
         };
-        Bullet.prototype.FireBullet = function (spawnPoint, dir) {
+        Bullet.prototype.FireBullet = function (spawnPoint, dir, owner) {
             this.CurrentBullet.Position = spawnPoint;
             this.CurrentBullet.x = spawnPoint.x;
             this.CurrentBullet.y = spawnPoint.y;
             this.CurrentBullet.Direction = dir;
             this.CurrentBullet.IsInPlay = true;
-            this._currentBulletIndex++;
-            if (this._currentBulletIndex >= this._bullets.length) {
-                this._currentBulletIndex = 0;
-            }
+            this.CurrentBullet.Owner = owner;
             createjs.Sound.play("bulletSound", { volume: 0.1 });
+            this._nextBullet();
         };
         return Bullet;
     }());

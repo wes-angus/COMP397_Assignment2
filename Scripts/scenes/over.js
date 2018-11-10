@@ -31,7 +31,10 @@ var scenes;
         };
         Over.prototype.Start = function () {
             this._ocean = new objects.Ocean();
-            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 360, 240, true);
+            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 360, 200, true);
+            if (managers.Game.scoreBoard.Win) {
+                this._gameOverLbl.text = "You Win!";
+            }
             this._restartBtn = new objects.Button("restartButton", 360, 360, true);
             this.Main();
         };

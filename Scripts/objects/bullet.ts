@@ -5,6 +5,7 @@ module objects {
         private _direction: util.Vector2;
         private _inPlay: boolean;
         private _vel: util.Vector2;
+        private _owner: string;
 
         //public props
         get Direction(): util.Vector2 {
@@ -23,6 +24,13 @@ module objects {
                 this.Reset();
             }
             this._vel = util.Vector2.Mult(this.Direction, this._speed);
+        }
+
+        get Owner(): string {
+            return this._owner;
+        }
+        set Owner(newOwner: string) {
+            this._owner = newOwner;
         }
 
         constructor() {
@@ -47,6 +55,7 @@ module objects {
 
         //public methods
         public Reset(): void {
+            this.Owner = "";
             this.x = -10000;
             this.y = -10000;
             this.Direction = util.Vector2.zero();
