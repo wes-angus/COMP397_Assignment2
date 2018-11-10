@@ -41,7 +41,6 @@ var objects;
                     this.Reset();
                 }
                 this._vel = util.Vector2.Mult(this.Direction, this._speed);
-                console.log("vel: ", this._vel);
             },
             enumerable: true,
             configurable: true
