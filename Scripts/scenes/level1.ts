@@ -4,7 +4,7 @@ module scenes {
         //Game objects
         private _player: objects.Player;
         private _ocean: objects.Ocean;
-        private _island: objects.Island;
+        private _island: objects.Coin;
         private _enemy: objects.Enemy;
         private _engineSound: createjs.AbstractSoundInstance;
 
@@ -39,12 +39,12 @@ module scenes {
             this._player = new objects.Player();
 
             //Island object
-            this._island = new objects.Island();
+            this._island = new objects.Coin();
 
             //Enemy object
             this._enemy = new objects.Enemy();
 
-            this._engineSound = createjs.Sound.play("engineSound", { volume: 0.1, loop: -1 });
+            this._engineSound = createjs.Sound.play("engineSound", { volume: 0.067, loop: -1 });
 
             //Instantiate new bullet manager
             this._bulletManager = new managers.Bullet();

@@ -18,28 +18,30 @@ var objects;
         //public props
         //constructor
         function Ocean() {
-            var _this = _super.call(this, "ocean", false) || this;
+            var _this = _super.call(this, "ocean_h", false) || this;
+            //private inst. vars
+            _this.__horizontalSpeed = 0;
             _this.Start();
             return _this;
         }
         //private methods
         Ocean.prototype._move = function () {
-            this.y += this._verticalSpeed;
+            this.x += this.__horizontalSpeed;
         };
         Ocean.prototype._checkBounds = function () {
-            if (this.y >= 0) {
+            if (this.x <= -1440) {
                 this.Reset();
             }
         };
         //public methods
         Ocean.prototype.Reset = function () {
-            this.y = -960;
+            this.x = 0;
         };
         Ocean.prototype.Destroy = function () {
         };
         Ocean.prototype.Start = function () {
             this.Reset();
-            this._verticalSpeed = 5; //5px per frame
+            this.__horizontalSpeed = -5; //5px per frame
         };
         Ocean.prototype.Update = function () {
             this._move();

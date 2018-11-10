@@ -13,43 +13,45 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Island = /** @class */ (function (_super) {
-        __extends(Island, _super);
+    var Coin = /** @class */ (function (_super) {
+        __extends(Coin, _super);
         //public props
         //constructor
-        function Island() {
-            var _this = _super.call(this, "island", false) || this;
+        function Coin() {
+            var _this = _super.call(this, "coin", false) || this;
             _this.Start();
             return _this;
         }
         //private methods
-        Island.prototype._move = function () {
-            this.y += this._verticalSpeed;
+        Coin.prototype._move = function () {
+            this.x += this._horizontalSpeed;
             this._updatePosition();
         };
-        Island.prototype._checkBounds = function () {
-            if (this.y > 480 + this.Height) {
+        Coin.prototype._checkBounds = function () {
+            if (this.x < -this.Width) {
                 this.Reset();
             }
         };
         //public methods
-        Island.prototype.Reset = function () {
-            this._verticalSpeed = 5;
-            this.y = -this.Height;
-            this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
+        Coin.prototype.Reset = function () {
+            this._horizontalSpeed = -5;
+            this.x = 720 + this.Width;
+            this.y = Math.floor(Math.random() * (480 - this.Height) + this.HalfHeight);
             this.IsColliding = false;
+            this.alpha = 255;
         };
-        Island.prototype.Destroy = function () {
+        Coin.prototype.Destroy = function () {
+            this.alpha = 0;
         };
-        Island.prototype.Start = function () {
+        Coin.prototype.Start = function () {
             this.Reset();
         };
-        Island.prototype.Update = function () {
+        Coin.prototype.Update = function () {
             this._move();
             this._checkBounds();
         };
-        return Island;
+        return Coin;
     }(objects.GameObject));
-    objects.Island = Island;
+    objects.Coin = Coin;
 })(objects || (objects = {}));
-//# sourceMappingURL=island.js.map
+//# sourceMappingURL=coin.js.map

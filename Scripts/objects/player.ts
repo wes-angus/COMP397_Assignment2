@@ -2,8 +2,9 @@ module objects {
     export class Player extends objects.GameObject {
 
         //constructors
-        constructor(y: number = 435) {
-            super("plane", true);
+        constructor(x: number = 45, y: number = 240) {
+            super("tank", true);
+            this.x = x;
             this.y = y;
 
             this.Start();
@@ -20,17 +21,23 @@ module objects {
 
         }
         public Start(): void {
-            
+
         }
         public Update(): void {
-            this.x = managers.Game.stage.mouseX;
-
-            if (this.x > 640 - this.HalfWidth) {
-                this.x = 640 - this.HalfWidth;
+            if (this.y > 480 - this.HalfHeight) {
+                this.y = 480 - this.HalfHeight;
+            }
+            else if (this.y < this.HalfHeight) {
+                this.y = this.HalfHeight;
+            }
+            /*
+            if (this.x > 720 - this.HalfWidth) {
+                this.x = 720 - this.HalfWidth;
             }
             else if (this.x < this.HalfWidth) {
                 this.x = this.HalfWidth;
             }
+            */
 
             this._updatePosition();
         }

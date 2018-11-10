@@ -24,8 +24,8 @@ module scenes {
         }
         public Start(): void {
             this._ocean = new objects.Ocean();
-            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 320, 240, true);
-            this._restartBtn = new objects.Button("restartButton", 320, 360, true);
+            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 360, 240, true);
+            this._restartBtn = new objects.Button("restartButton", 360, 360, true);
 
             this.Main();
         }

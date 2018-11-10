@@ -98,9 +98,10 @@ var objects;
             other.IsColliding = true;
             var sound;
             switch (other.name) {
-                case "island":
-                    sound = createjs.Sound.play("yaySound", { volume: 0.1 });
+                case "coin":
+                    sound = createjs.Sound.play("coinSound", { volume: 0.1 });
                     managers.Game.scoreBoard.Score += 100;
+                    other.Destroy();
                     break;
                 case "enemy":
                     sound = createjs.Sound.play("explodeSound", { volume: 0.1 });

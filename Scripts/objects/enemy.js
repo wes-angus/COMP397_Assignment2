@@ -19,34 +19,35 @@ var objects;
         //constructor
         function Enemy() {
             var _this = _super.call(this, "enemy", true) || this;
+            _this.rotation = 180;
             _this.Start();
             return _this;
         }
         //private methods
         Enemy.prototype._move = function () {
-            this.y += this._verticalSpeed;
+            this.x += this._horizontalSpeed;
             this._updatePosition();
         };
         Enemy.prototype._checkBounds = function () {
-            if (this.y > 480 + this.Height) {
+            if (this.x < -this.Width) {
                 this.Reset();
             }
-            if ((createjs.Ticker.getTicks() % 20 == 0) && (this.y > 0)) {
-                managers.Game.bulletManager.FireBullet(util.Vector2.Add(this.Position, this._bulletSpawn), util.Vector2.down());
+            if ((createjs.Ticker.getTicks() % 20 == 0) && (this.x < 720 + this.Height)) {
+                managers.Game.bulletManager.FireBullet(util.Vector2.Add(this.Position, this._bulletSpawn), util.Vector2.left());
             }
         };
         //public methods
         Enemy.prototype.Reset = function () {
-            this._verticalSpeed = Math.floor(Math.random() * 2) + 6;
-            this.y = -this.Height * Math.floor(Math.random() * 10) + 5;
-            this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
+            this._horizontalSpeed = -(Math.floor(Math.random() * 2) + 6);
+            this.x = 720 + this.Width * Math.floor(Math.random() * 10) + 5;
+            this.y = Math.floor(Math.random() * (480 - this.Height) + this.HalfHeight);
             this.IsColliding = false;
             this._updatePosition();
         };
         Enemy.prototype.Destroy = function () {
         };
         Enemy.prototype.Start = function () {
-            this._bulletSpawn = new util.Vector2(0, 3 + this.HalfHeight);
+            this._bulletSpawn = new util.Vector2(-5 - this.HalfWidth, 5);
             this.Reset();
         };
         Enemy.prototype.Update = function () {

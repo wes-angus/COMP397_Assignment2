@@ -31,7 +31,9 @@ var scenes;
         };
         Start.prototype.Start = function () {
             this._ocean = new objects.Ocean();
-            this._welcomeLbl = new objects.Label("Mail Pilot", "60px", "Consolas", "#FFFF00", 320, 240, true);
+            this._welcomeLbl = new objects.Label("Tortuga no Sensō: War in Space", "60px", "Consolas", "#FFFF00", 340, 180, false);
+            this._welcomeLbl.lineWidth = 640;
+            this._welcomeLbl.textAlign = "center";
             this._startBtn = new objects.Button("startButton", 320, 360, true);
             this.Main();
         };

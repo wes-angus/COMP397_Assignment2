@@ -54,7 +54,7 @@ var objects;
             this.y = this.Position.y;
         };
         Bullet.prototype._checkBounds = function () {
-            if (this.Position.y > 480 || this.Position.y < 0) {
+            if (this.Position.x > 720 + this.HalfHeight || this.Position.x < -this.HalfHeight) {
                 this.Direction = util.Vector2.zero();
                 this.IsInPlay = false;
             }
@@ -64,6 +64,7 @@ var objects;
             this.x = -10000;
             this.y = -10000;
             this.Direction = util.Vector2.zero();
+            this.IsColliding = false;
         };
         Bullet.prototype.Start = function () {
             this._speed = 10;

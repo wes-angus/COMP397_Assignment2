@@ -16,9 +16,11 @@ var objects;
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         //constructors
-        function Player(y) {
-            if (y === void 0) { y = 435; }
-            var _this = _super.call(this, "plane", true) || this;
+        function Player(x, y) {
+            if (x === void 0) { x = 45; }
+            if (y === void 0) { y = 240; }
+            var _this = _super.call(this, "tank", true) || this;
+            _this.x = x;
             _this.y = y;
             _this.Start();
             return _this;
@@ -32,13 +34,20 @@ var objects;
         Player.prototype.Start = function () {
         };
         Player.prototype.Update = function () {
-            this.x = managers.Game.stage.mouseX;
-            if (this.x > 640 - this.HalfWidth) {
-                this.x = 640 - this.HalfWidth;
+            if (this.y > 480 - this.HalfHeight) {
+                this.y = 480 - this.HalfHeight;
+            }
+            else if (this.y < this.HalfHeight) {
+                this.y = this.HalfHeight;
+            }
+            /*
+            if (this.x > 720 - this.HalfWidth) {
+                this.x = 720 - this.HalfWidth;
             }
             else if (this.x < this.HalfWidth) {
                 this.x = this.HalfWidth;
             }
+            */
             this._updatePosition();
         };
         return Player;
