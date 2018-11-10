@@ -1,3 +1,6 @@
+//Music: Wonderland (Instrumental) by Dexter Britain
+//Source: https://dexterbritain.com/
+
 module scenes {
     export class Level1 extends objects.Scene {
         //private inst. vars
@@ -6,7 +9,7 @@ module scenes {
         private _space: objects.Background;
         private _coins: objects.Coin[];
         private _enemies: objects.Enemy[];
-        private _engineSound: createjs.AbstractSoundInstance;
+        private _music: createjs.AbstractSoundInstance;
         private _coinCount = 4;
         private _startingEnemies: number = 20;
         private _enemyCount = 4;
@@ -30,7 +33,7 @@ module scenes {
 
         public Destroy(): void {
             this.removeAllChildren();
-            this._engineSound.stop();
+            this._music.stop();
             //TODO: Clean up bullet mananger
         }
 
@@ -47,7 +50,7 @@ module scenes {
             //Enemy object
             this._enemies = [];
 
-            this._engineSound = createjs.Sound.play("engineSound", { volume: 0.067, loop: -1 });
+            this._music = createjs.Sound.play("levelMusic", { volume: 0.2, loop: -1 });
 
             //Instantiate new bullet manager
             this._bulletManager = new managers.Bullet();

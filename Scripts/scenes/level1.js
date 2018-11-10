@@ -1,3 +1,5 @@
+//Music: Wonderland (Instrumental) by Dexter Britain
+//Source: https://dexterbritain.com/
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -31,7 +33,7 @@ var scenes;
         };
         Level1.prototype.Destroy = function () {
             this.removeAllChildren();
-            this._engineSound.stop();
+            this._music.stop();
             //TODO: Clean up bullet mananger
         };
         Level1.prototype.Start = function () {
@@ -43,7 +45,7 @@ var scenes;
             this._coins = [];
             //Enemy object
             this._enemies = [];
-            this._engineSound = createjs.Sound.play("engineSound", { volume: 0.067, loop: -1 });
+            this._music = createjs.Sound.play("levelMusic", { volume: 0.2, loop: -1 });
             //Instantiate new bullet manager
             this._bulletManager = new managers.Bullet();
             managers.Game.bulletManager = this._bulletManager;

@@ -72,7 +72,7 @@ module managers {
             this.CurrentBullet.Direction = dir;
             this.CurrentBullet.IsInPlay = true;
             this.CurrentBullet.Owner = owner;
-            createjs.Sound.play("bulletSound", { volume: 0.1 });
+            createjs.Sound.play("bulletSound", { volume: 0.05 });
 
             this._nextBullet();
         }
