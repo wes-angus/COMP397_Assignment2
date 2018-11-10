@@ -7,9 +7,9 @@ module scenes {
         private _coins: objects.Coin[];
         private _enemies: objects.Enemy[];
         private _engineSound: createjs.AbstractSoundInstance;
-        private _coinCount = 3;
+        private _coinCount = 4;
         private _startingEnemies: number = 20;
-        private _enemyCount = 4;
+        private _enemyCount = 3;
 
         private _bulletManager: managers.Bullet;
 
@@ -83,7 +83,6 @@ module scenes {
             this._bulletManager.Update();
             this._bulletManager.Bullets.forEach(bullet => {
                 if (bullet.IsInPlay) {
-                    console.log(bullet.Owner);
                     if (bullet.Owner === "enemy") {
                         this._player.checkIntersection(bullet);
                     }

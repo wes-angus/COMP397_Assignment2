@@ -2,6 +2,7 @@ module objects {
     export class Enemy extends objects.GameObject {
         //private inst. vars
         private _horizontalSpeed: number;
+        private _verticalSpeed: number;
         private _bulletSpawn: util.Vector2;
         private _health: number;
         private _origHealth: number;
@@ -42,6 +43,7 @@ module objects {
         }
         _move(): void {
             this.x += this._horizontalSpeed;
+            this.y += this._verticalSpeed;
             this._updatePosition();
         }
         _checkBounds(): void {
@@ -63,6 +65,7 @@ module objects {
         //public methods
         public Reset(): void {
             this._horizontalSpeed = -(Math.floor(Math.random() * 2) + 6);
+            this._verticalSpeed = Math.floor(Math.random() * 4) - 2;
             this.x = 720 + this.Width * Math.floor(Math.random() * 5) + 5;
             this.y = Math.floor(Math.random() * (480 - this.Height) + this.HalfHeight);
             this.Health = this._origHealth;

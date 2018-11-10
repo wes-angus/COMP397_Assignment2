@@ -66,7 +66,9 @@ var managers;
                 this._remainingEnemies = newVal;
                 this._enemiesLabel.text = "Remaining: " + this._remainingEnemies;
                 if (this._remainingEnemies < 1) {
-                    managers.Game.scoreBoard.Score += 10000;
+                    managers.Game.scoreBoard.Score += 5000;
+                    managers.Game.scoreBoard.Score += this.Coins * 100;
+                    this.Coins = 0;
                     this._win = true;
                     managers.Game.curState = config.Scene.OVER;
                     if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
@@ -91,7 +93,7 @@ var managers;
             if (scoreNum === void 0) { scoreNum = 0; }
             this.Lives = livesNum;
             this.Score = scoreNum;
-            this.Coins = scoreNum;
+            this.Coins %= 25;
         };
         ScoreBoard.prototype.AddGameUI = function (curScene) {
             curScene.addChild(this._scoreLabel);

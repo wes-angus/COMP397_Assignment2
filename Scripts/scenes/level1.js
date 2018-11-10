@@ -19,9 +19,9 @@ var scenes;
         //constructor
         function Level1() {
             var _this = _super.call(this) || this;
-            _this._coinCount = 3;
+            _this._coinCount = 4;
             _this._startingEnemies = 20;
-            _this._enemyCount = 4;
+            _this._enemyCount = 3;
             _this.Start();
             return _this;
         }
@@ -76,7 +76,6 @@ var scenes;
             this._bulletManager.Update();
             this._bulletManager.Bullets.forEach(function (bullet) {
                 if (bullet.IsInPlay) {
-                    console.log(bullet.Owner);
                     if (bullet.Owner === "enemy") {
                         _this._player.checkIntersection(bullet);
                     }
