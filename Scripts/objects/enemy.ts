@@ -21,7 +21,7 @@ module objects {
         }
 
         //constructor
-        constructor(health: number = 2, shotDelay: number = 20) {
+        constructor(health: number = 2, shotDelay: number = 24) {
             super("enemy", true);
             this.rotation = 180;
             this._origHealth = health;
@@ -50,6 +50,14 @@ module objects {
             if (this.x < -this.Width) {
                 this.Reset();
             }
+            if (this.y < this.HalfHeight) {
+                this.y = this.HalfHeight;
+                this._verticalSpeed *= -1;
+            }
+            else if (this.y > 480 - this.HalfHeight) {
+                this.y = 480 - this.HalfHeight;
+                this._verticalSpeed *= -1;
+            }
 
             if ((this.x < 720 + this.HalfHeight)) {
                 if (createjs.Ticker.getTicks() > this._shootFrame) {
@@ -66,7 +74,7 @@ module objects {
         public Reset(): void {
             this._horizontalSpeed = -(Math.floor(Math.random() * 2) + 6);
             this._verticalSpeed = Math.floor(Math.random() * 4) - 2;
-            this.x = 720 + this.Width * Math.floor(Math.random() * 5) + 5;
+            this.x = 720 + this.Width * Math.floor(Math.random() * 6) + 5;
             this.y = Math.floor(Math.random() * (480 - this.Height) + this.HalfHeight);
             this.Health = this._origHealth;
             this.IsColliding = false;
@@ -75,7 +83,7 @@ module objects {
         }
         public Destroy(): void {
             console.log("Killed Enemy!");
-            managers.Game.scoreBoard.Score += 100;
+            managers.Game.scoreBoard.Score += 150;
             managers.Game.scoreBoard.RemainingEnemies--;
             this.IsColliding = true;
             this.alpha = 0;

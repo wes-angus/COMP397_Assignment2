@@ -3,7 +3,7 @@ var managers;
     var ScoreBoard = /** @class */ (function () {
         //constructor
         function ScoreBoard(livesNum, scoreNum, highScoreNum) {
-            if (livesNum === void 0) { livesNum = 5; }
+            if (livesNum === void 0) { livesNum = 7; }
             if (scoreNum === void 0) { scoreNum = 0; }
             if (highScoreNum === void 0) { highScoreNum = 0; }
             this.Start();
@@ -89,7 +89,7 @@ var managers;
         //private methods
         //public methods
         ScoreBoard.prototype.Reset = function (livesNum, scoreNum) {
-            if (livesNum === void 0) { livesNum = 5; }
+            if (livesNum === void 0) { livesNum = 7; }
             if (scoreNum === void 0) { scoreNum = 0; }
             this.Lives = livesNum;
             this.Score = scoreNum;
@@ -108,8 +108,8 @@ var managers;
             this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 250, 10, false);
             this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 20, 10, false);
             this._coinsLabel = new objects.Label("Coins: 99", "30px", "Consolas", "#FFFF00", 540, 10, false);
-            this._enemiesLabel = new objects.Label("Remaining: 99", "30px", "Consolas", "#FFFF00", 300, 430, false);
-            this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 360, 120, true);
+            this._enemiesLabel = new objects.Label("Remaining: 99", "30px", "Consolas", "#FFFF00", 360, 440, true);
+            this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 360, 80, true);
         };
         return ScoreBoard;
     }());

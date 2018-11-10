@@ -70,7 +70,7 @@ module managers {
         }
 
         //constructor
-        constructor(livesNum: number = 5, scoreNum: number = 0, highScoreNum: number = 0) {
+        constructor(livesNum: number = 7, scoreNum: number = 0, highScoreNum: number = 0) {
             this.Start();
 
             this.Lives = livesNum;
@@ -83,7 +83,7 @@ module managers {
         //private methods
 
         //public methods
-        public Reset(livesNum: number = 5, scoreNum: number = 0) {
+        public Reset(livesNum: number = 7, scoreNum: number = 0) {
             this.Lives = livesNum;
             this.Score = scoreNum;
             this.Coins %= 25;
@@ -104,8 +104,8 @@ module managers {
             this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 250, 10, false);
             this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 20, 10, false);
             this._coinsLabel = new objects.Label("Coins: 99", "30px", "Consolas", "#FFFF00", 540, 10, false);
-            this._enemiesLabel = new objects.Label("Remaining: 99", "30px", "Consolas", "#FFFF00", 300, 430, false);
-            this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 360, 120, true);
+            this._enemiesLabel = new objects.Label("Remaining: 99", "30px", "Consolas", "#FFFF00", 360, 440, true);
+            this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 360, 80, true);
         }
     }
 }

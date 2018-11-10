@@ -10,6 +10,10 @@
     var assetManifest = [
         { id: "startButton", src: "./Assets/images/startButton.png" },
         { id: "restartButton", src: "./Assets/images/restartButton.png" },
+        { id: "menuButton", src: "./Assets/images/menuButton.png" },
+        { id: "exitButton", src: "./Assets/images/exitButton.png" },
+        { id: "howToButton", src: "./Assets/images/howToButton.png" },
+        { id: "nextButton", src: "./Assets/images/nextButton.png" },
         { id: "tank", src: "./Assets/images/tank.png" },
         { id: "enemy", src: "./Assets/images/tank2.png" },
         { id: "coin", src: "./Assets/images/coin10.png" },
@@ -70,6 +74,9 @@
                 break;
             case config.Scene.LEVEL1:
                 curScene = new scenes.Level1();
+                break;
+            case config.Scene.INSTRUCTIONS:
+                curScene = new scenes.Instructions();
                 break;
             case config.Scene.OVER:
                 curScene = new scenes.Over();

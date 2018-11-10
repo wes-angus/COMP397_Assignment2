@@ -18,7 +18,7 @@ var objects;
         //constructor
         function Enemy(health, shotDelay) {
             if (health === void 0) { health = 2; }
-            if (shotDelay === void 0) { shotDelay = 20; }
+            if (shotDelay === void 0) { shotDelay = 24; }
             var _this = _super.call(this, "enemy", true) || this;
             _this._shootFrame = 0;
             _this.rotation = 180;
@@ -61,6 +61,14 @@ var objects;
             if (this.x < -this.Width) {
                 this.Reset();
             }
+            if (this.y < this.HalfHeight) {
+                this.y = this.HalfHeight;
+                this._verticalSpeed *= -1;
+            }
+            else if (this.y > 480 - this.HalfHeight) {
+                this.y = 480 - this.HalfHeight;
+                this._verticalSpeed *= -1;
+            }
             if ((this.x < 720 + this.HalfHeight)) {
                 if (createjs.Ticker.getTicks() > this._shootFrame) {
                     this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
@@ -72,7 +80,7 @@ var objects;
         Enemy.prototype.Reset = function () {
             this._horizontalSpeed = -(Math.floor(Math.random() * 2) + 6);
             this._verticalSpeed = Math.floor(Math.random() * 4) - 2;
-            this.x = 720 + this.Width * Math.floor(Math.random() * 5) + 5;
+            this.x = 720 + this.Width * Math.floor(Math.random() * 6) + 5;
             this.y = Math.floor(Math.random() * (480 - this.Height) + this.HalfHeight);
             this.Health = this._origHealth;
             this.IsColliding = false;
@@ -81,7 +89,7 @@ var objects;
         };
         Enemy.prototype.Destroy = function () {
             console.log("Killed Enemy!");
-            managers.Game.scoreBoard.Score += 100;
+            managers.Game.scoreBoard.Score += 150;
             managers.Game.scoreBoard.RemainingEnemies--;
             this.IsColliding = true;
             this.alpha = 0;

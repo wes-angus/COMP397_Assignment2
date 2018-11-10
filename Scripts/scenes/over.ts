@@ -4,6 +4,7 @@ module scenes {
         private _space: objects.Background;
         private _gameOverLbl: objects.Label;
         private _restartBtn: objects.Button;
+        private _menuBtn: objects.Button;
 
         //public props
 
@@ -24,11 +25,12 @@ module scenes {
         }
         public Start(): void {
             this._space = new objects.Background();
-            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 360, 200, true);
+            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 365, 160, true);
             if (managers.Game.scoreBoard.Win) {
-                this._gameOverLbl.text = "You Win!";
+                this._gameOverLbl.text = "You Win!!";
             }
-            this._restartBtn = new objects.Button("restartButton", 360, 360, true);
+            this._restartBtn = new objects.Button("restartButton", 360, 340, true);
+            this._menuBtn = new objects.Button("menuButton", 360, 440, true);
 
             this.Main();
         }
@@ -38,9 +40,14 @@ module scenes {
             this.addChild(this._space);
             this.addChild(this._gameOverLbl);
             this.addChild(this._restartBtn);
+            this.addChild(this._menuBtn);
 
             this._restartBtn.on("click", () => {
                 managers.Game.curState = config.Scene.LEVEL1;
+                managers.Game.scoreBoard.Reset();
+            });
+            this._menuBtn.on("click", () => {
+                managers.Game.curState = config.Scene.START;
                 managers.Game.scoreBoard.Reset();
             });
 

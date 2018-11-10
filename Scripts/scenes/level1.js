@@ -21,7 +21,7 @@ var scenes;
             var _this = _super.call(this) || this;
             _this._coinCount = 4;
             _this._startingEnemies = 20;
-            _this._enemyCount = 3;
+            _this._enemyCount = 4;
             _this.Start();
             return _this;
         }

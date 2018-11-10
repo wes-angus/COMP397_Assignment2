@@ -31,11 +31,13 @@ var scenes;
         };
         Start.prototype.Start = function () {
             this._space = new objects.Background();
-            this._welcomeLbl = new objects.Label("Tortuga no Sensō: War in Space", "60px", "Consolas", "#FFFF00", 340, 150, false);
+            this._welcomeLbl = new objects.Label("Tortuga no Sensō: War in Space", "60px", "Consolas", "#FFFF00", 360, 80, false);
             this._welcomeLbl.lineWidth = 640;
             this._welcomeLbl.lineHeight = 60;
             this._welcomeLbl.textAlign = "center";
-            this._startBtn = new objects.Button("startButton", 320, 360, true);
+            this._startBtn = new objects.Button("startButton", 220, 350, true);
+            this._howToBtn = new objects.Button("howToButton", 500, 350, true);
+            this._exitBtn = new objects.Button("exitButton", 360, 450, true);
             this.Main();
         };
         Start.prototype.Update = function () {
@@ -45,8 +47,16 @@ var scenes;
             this.addChild(this._space);
             this.addChild(this._welcomeLbl);
             this.addChild(this._startBtn);
+            this.addChild(this._howToBtn);
+            this.addChild(this._exitBtn);
             this._startBtn.on("click", function () {
                 managers.Game.curState = config.Scene.LEVEL1;
+            });
+            this._howToBtn.on("click", function () {
+                managers.Game.curState = config.Scene.INSTRUCTIONS;
+            });
+            this._exitBtn.on("click", function () {
+                managers.Game.curState = config.Scene.OVER;
             });
         };
         return Start;
