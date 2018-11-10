@@ -21,7 +21,7 @@ var config;
             "ArrowDown",
             "ArrowRight",
             "ArrowLeft",
-            "KeyAlt" // shoot
+            "ShiftRight" // shoot
         ]
     ];
 })(config || (config = {}));

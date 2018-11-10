@@ -56,7 +56,6 @@ var objects;
             else if (managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Right])) {
                 this.x += this._moveStep / 4;
             }
-            console.log(createjs.Ticker.getTicks());
             if (createjs.Ticker.getTicks() > this._shootFrame) {
                 if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Shoot]) ||
                     managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Shoot])) {

@@ -4,11 +4,7 @@ var managers;
         function Input() {
         }
         Input.isKeydown = function (key) {
-            //if (Input.keys[key] === undefined) {
-            //     return false;
-            // }else {
             return Input.keys[key];
-            //}
         };
         Input.ShowInput = function (e, not) {
             if (not) {
@@ -19,11 +15,11 @@ var managers;
             }
         };
         Input.HandleInput = function (e) {
-            //            this.ShowInput(e);
+            //this.ShowInput(e);
             Input.keys[e.code] = true;
         };
         Input.HandleUpInput = function (e) {
-            //            this.ShowInput(e, true);
+            //this.ShowInput(e, true);
             Input.keys[e.code] = false;
         };
         Input.keys = {};

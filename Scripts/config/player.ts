@@ -20,7 +20,7 @@ module config {
             "ArrowDown",    // Backward
             "ArrowRight",   // Right
             "ArrowLeft",    // Left
-            "KeyAlt"        // shoot
+            "ShiftRight"    // shoot
         ]
     ]
 }
