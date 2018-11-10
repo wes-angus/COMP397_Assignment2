@@ -71,17 +71,16 @@ module objects {
             this.Position.y = this.y;
         }
 
-        private resolveCollision(other: GameObject): void {
+        protected resolveCollision(other: GameObject): void {
             other.IsColliding = true;
 
             switch (other.name) {
                 case "coin":
                     createjs.Sound.play("coinSound", { volume: 0.1 });
-                    managers.Game.scoreBoard.Score += 100;
+                    managers.Game.scoreBoard.Score += 50;
                     other.Destroy();
                     managers.Game.scoreBoard.Coins++;
-                    if(managers.Game.scoreBoard.Coins > 49)
-                    {
+                    if (managers.Game.scoreBoard.Coins > 49) {
                         managers.Game.scoreBoard.Lives++;
                         managers.Game.scoreBoard.Coins = 0;
                         createjs.Sound.play("lifeSound", { volume: 0.1 });

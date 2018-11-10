@@ -58,6 +58,7 @@ var scenes;
             this._bulletManager.Bullets.forEach(function (bullet) {
                 if (bullet.IsInPlay) {
                     _this._player.checkIntersection(bullet);
+                    _this._enemy.checkIntersection(bullet);
                 }
             });
         };

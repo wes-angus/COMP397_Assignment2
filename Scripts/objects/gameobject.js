@@ -99,7 +99,7 @@ var objects;
             switch (other.name) {
                 case "coin":
                     createjs.Sound.play("coinSound", { volume: 0.1 });
-                    managers.Game.scoreBoard.Score += 100;
+                    managers.Game.scoreBoard.Score += 50;
                     other.Destroy();
                     managers.Game.scoreBoard.Coins++;
                     if (managers.Game.scoreBoard.Coins > 49) {

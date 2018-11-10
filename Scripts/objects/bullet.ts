@@ -39,7 +39,7 @@ module objects {
             this.y = this.Position.y;
         }
         _checkBounds(): void {
-            if (this.Position.x > 720 + this.HalfHeight || this.Position.x < -this.HalfHeight) {
+            if (this.Position.x > 1440 + this.HalfHeight || this.Position.x < -this.HalfHeight) {
                 this.Direction = util.Vector2.zero();
                 this.IsInPlay = false;
             }

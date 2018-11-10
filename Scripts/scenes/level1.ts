@@ -65,6 +65,7 @@ module scenes {
             this._bulletManager.Bullets.forEach(bullet => {
                 if (bullet.IsInPlay) {
                     this._player.checkIntersection(bullet);
+                    this._enemy.checkIntersection(bullet);
                 }
             });
         }

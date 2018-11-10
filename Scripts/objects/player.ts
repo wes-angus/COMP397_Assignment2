@@ -1,13 +1,17 @@
 module objects {
     export class Player extends objects.GameObject {
         private _moveStep: number;
+        private _bulletSpawn: util.Vector2;
+        private _shootFrame: number = 0;
+        private _shotDelay: number;
 
         //constructors
-        constructor(x: number = 45, y: number = 240, moveStep: number = 8) {
+        constructor(x: number = 45, y: number = 240, moveStep: number = 8, shotDelay: number = 10) {
             super("tank", true);
             this.x = x;
             this.y = y;
             this._moveStep = moveStep;
+            this._shotDelay = shotDelay;
 
             this.Start();
         }
@@ -40,8 +44,16 @@ module objects {
                 this.x += this._moveStep / 4;
             }
 
-            if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Shoot])) {
-                //TODO: Do the shooting
+            console.log(createjs.Ticker.getTicks());
+            if (createjs.Ticker.getTicks() > this._shootFrame) {
+                if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Shoot]) ||
+                    managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Shoot])) {
+                    managers.Game.bulletManager.FireBullet(
+                        util.Vector2.Add(this.Position, this._bulletSpawn),
+                        util.Vector2.right()
+                    );
+                    this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
+                }
             }
 
             if (this.y > 480 - this.HalfHeight + 8) {
@@ -66,7 +78,7 @@ module objects {
 
         }
         public Start(): void {
-
+            this._bulletSpawn = new util.Vector2(4 + this.HalfWidth, -4);
         }
         public Update(): void {
             this._handleInput();

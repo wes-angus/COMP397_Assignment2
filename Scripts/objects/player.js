@@ -16,14 +16,17 @@ var objects;
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         //constructors
-        function Player(x, y, moveStep) {
+        function Player(x, y, moveStep, shotDelay) {
             if (x === void 0) { x = 45; }
             if (y === void 0) { y = 240; }
             if (moveStep === void 0) { moveStep = 8; }
+            if (shotDelay === void 0) { shotDelay = 10; }
             var _this = _super.call(this, "tank", true) || this;
+            _this._shootFrame = 0;
             _this.x = x;
             _this.y = y;
             _this._moveStep = moveStep;
+            _this._shotDelay = shotDelay;
             _this.Start();
             return _this;
         }
@@ -53,8 +56,13 @@ var objects;
             else if (managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Right])) {
                 this.x += this._moveStep / 4;
             }
-            if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Shoot])) {
-                //TODO: Do the shooting
+            console.log(createjs.Ticker.getTicks());
+            if (createjs.Ticker.getTicks() > this._shootFrame) {
+                if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Shoot]) ||
+                    managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Shoot])) {
+                    managers.Game.bulletManager.FireBullet(util.Vector2.Add(this.Position, this._bulletSpawn), util.Vector2.right());
+                    this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
+                }
             }
             if (this.y > 480 - this.HalfHeight + 8) {
                 this.y = 480 - this.HalfHeight + 8;
@@ -75,6 +83,7 @@ var objects;
         Player.prototype.Destroy = function () {
         };
         Player.prototype.Start = function () {
+            this._bulletSpawn = new util.Vector2(4 + this.HalfWidth, -4);
         };
         Player.prototype.Update = function () {
             this._handleInput();
