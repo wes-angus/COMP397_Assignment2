@@ -30,7 +30,7 @@ var scenes;
             this.removeAllChildren();
         };
         Over.prototype.Start = function () {
-            this._ocean = new objects.Ocean();
+            this._space = new objects.Background();
             this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 360, 200, true);
             if (managers.Game.scoreBoard.Win) {
                 this._gameOverLbl.text = "You Win!";
@@ -41,7 +41,7 @@ var scenes;
         Over.prototype.Update = function () {
         };
         Over.prototype.Main = function () {
-            this.addChild(this._ocean);
+            this.addChild(this._space);
             this.addChild(this._gameOverLbl);
             this.addChild(this._restartBtn);
             this._restartBtn.on("click", function () {

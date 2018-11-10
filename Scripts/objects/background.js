@@ -13,42 +13,42 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Ocean = /** @class */ (function (_super) {
-        __extends(Ocean, _super);
+    var Background = /** @class */ (function (_super) {
+        __extends(Background, _super);
         //public props
         //constructor
-        function Ocean() {
-            var _this = _super.call(this, "ocean_h", false) || this;
+        function Background() {
+            var _this = _super.call(this, "space", false) || this;
             //private inst. vars
             _this.__horizontalSpeed = 0;
             _this.Start();
             return _this;
         }
         //private methods
-        Ocean.prototype._move = function () {
+        Background.prototype._move = function () {
             this.x += this.__horizontalSpeed;
         };
-        Ocean.prototype._checkBounds = function () {
-            if (this.x <= -1440) {
+        Background.prototype._checkBounds = function () {
+            if (this.x <= -1920) {
                 this.Reset();
             }
         };
         //public methods
-        Ocean.prototype.Reset = function () {
+        Background.prototype.Reset = function () {
             this.x = 0;
         };
-        Ocean.prototype.Destroy = function () {
+        Background.prototype.Destroy = function () {
         };
-        Ocean.prototype.Start = function () {
+        Background.prototype.Start = function () {
             this.Reset();
             this.__horizontalSpeed = -2; //2px per frame
         };
-        Ocean.prototype.Update = function () {
+        Background.prototype.Update = function () {
             this._move();
             this._checkBounds();
         };
-        return Ocean;
+        return Background;
     }(objects.GameObject));
-    objects.Ocean = Ocean;
+    objects.Background = Background;
 })(objects || (objects = {}));
-//# sourceMappingURL=ocean.js.map
+//# sourceMappingURL=background.js.map

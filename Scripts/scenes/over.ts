@@ -1,7 +1,7 @@
 module scenes {
     export class Over extends objects.Scene {
         //private inst. vars
-        private _ocean: objects.Ocean;
+        private _space: objects.Background;
         private _gameOverLbl: objects.Label;
         private _restartBtn: objects.Button;
 
@@ -23,7 +23,7 @@ module scenes {
             this.removeAllChildren();
         }
         public Start(): void {
-            this._ocean = new objects.Ocean();
+            this._space = new objects.Background();
             this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 360, 200, true);
             if (managers.Game.scoreBoard.Win) {
                 this._gameOverLbl.text = "You Win!";
@@ -35,7 +35,7 @@ module scenes {
         public Update(): void {
         }
         public Main(): void {
-            this.addChild(this._ocean);
+            this.addChild(this._space);
             this.addChild(this._gameOverLbl);
             this.addChild(this._restartBtn);
 

@@ -9,7 +9,7 @@ module objects {
         private _invincibleDelay: number;
 
         //constructors
-        constructor(x: number = 45, y: number = 240, moveStep: number = 8, shotDelay: number = 10, invincibleDelay: number = 120) {
+        constructor(x: number = 45, y: number = 240, moveStep: number = 8, shotDelay: number = 10, invincibleDelay: number = 60) {
             super("tank", true);
             this.x = x;
             this.y = y;

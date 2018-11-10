@@ -3,7 +3,7 @@ module scenes {
         //private inst. vars
         //Game objects
         private _player: objects.Player;
-        private _ocean: objects.Ocean;
+        private _space: objects.Background;
         private _coins: objects.Coin[];
         private _enemies: objects.Enemy[];
         private _engineSound: createjs.AbstractSoundInstance;
@@ -36,7 +36,7 @@ module scenes {
 
         public Start(): void {
             //Ocean background
-            this._ocean = new objects.Ocean();
+            this._space = new objects.Background();
 
             //Player object
             this._player = new objects.Player();
@@ -57,7 +57,7 @@ module scenes {
         }
 
         public Update(): void {
-            this._ocean.Update();
+            this._space.Update();
             this._player.Update();
             if (this._coins.length < this._coinCount) {
                 if (createjs.Ticker.getTicks() % 60 === 0) {
@@ -98,15 +98,14 @@ module scenes {
         }
 
         public Main(): void {
-            this.addChild(this._ocean);
-            this.addChild(this._player);
+            this.addChild(this._space);
+            managers.Game.scoreBoard.RemainingEnemies = this._startingEnemies;
+            managers.Game.scoreBoard.AddGameUI(this);
+            this.addChild(this._player);            
             //Add each bullet in the array to the scene
             this._bulletManager.Bullets.forEach(bullet => {
                 this.addChild(bullet);
             });
-
-            managers.Game.scoreBoard.RemainingEnemies = this._startingEnemies;
-            managers.Game.scoreBoard.AddGameUI(this);
         }
     }
 }

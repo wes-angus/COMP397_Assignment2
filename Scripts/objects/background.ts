@@ -1,5 +1,5 @@
 module objects {
-    export class Ocean extends objects.GameObject {
+    export class Background extends objects.GameObject {
         //private inst. vars
         private __horizontalSpeed: number = 0;
 
@@ -7,7 +7,7 @@ module objects {
 
         //constructor
         constructor() {
-            super("ocean_h", false);
+            super("space", false);
 
             this.Start();
         }
@@ -17,7 +17,7 @@ module objects {
             this.x += this.__horizontalSpeed;
         }
         _checkBounds(): void {
-            if (this.x <= -1440) {
+            if (this.x <= -1920) {
                 this.Reset();
             }
         }

@@ -21,7 +21,7 @@ var objects;
             if (y === void 0) { y = 240; }
             if (moveStep === void 0) { moveStep = 8; }
             if (shotDelay === void 0) { shotDelay = 10; }
-            if (invincibleDelay === void 0) { invincibleDelay = 120; }
+            if (invincibleDelay === void 0) { invincibleDelay = 60; }
             var _this = _super.call(this, "tank", true) || this;
             _this._shootFrame = 0;
             _this.x = x;

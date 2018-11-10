@@ -1,7 +1,7 @@
 module scenes {
     export class Start extends objects.Scene {
         //private inst. vars
-        private _ocean: objects.Ocean;
+        private _space: objects.Background;
         private _welcomeLbl: objects.Label;
         private _startBtn: objects.Button;
 
@@ -23,7 +23,7 @@ module scenes {
             this.removeAllChildren();
         }
         public Start(): void {
-            this._ocean = new objects.Ocean();
+            this._space = new objects.Background();
             this._welcomeLbl = new objects.Label("Tortuga no Sensō: War in Space", "60px", "Consolas", "#FFFF00", 340, 150, false);
             this._welcomeLbl.lineWidth = 640;
             this._welcomeLbl.lineHeight = 60;
@@ -33,10 +33,10 @@ module scenes {
             this.Main();
         }
         public Update(): void {
-            this._ocean.Update();
+            this._space.Update();
         }
         public Main(): void {
-            this.addChild(this._ocean);
+            this.addChild(this._space);
             this.addChild(this._welcomeLbl);
             this.addChild(this._startBtn);
 

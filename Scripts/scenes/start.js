@@ -30,7 +30,7 @@ var scenes;
             this.removeAllChildren();
         };
         Start.prototype.Start = function () {
-            this._ocean = new objects.Ocean();
+            this._space = new objects.Background();
             this._welcomeLbl = new objects.Label("Tortuga no Sensō: War in Space", "60px", "Consolas", "#FFFF00", 340, 150, false);
             this._welcomeLbl.lineWidth = 640;
             this._welcomeLbl.lineHeight = 60;
@@ -39,10 +39,10 @@ var scenes;
             this.Main();
         };
         Start.prototype.Update = function () {
-            this._ocean.Update();
+            this._space.Update();
         };
         Start.prototype.Main = function () {
-            this.addChild(this._ocean);
+            this.addChild(this._space);
             this.addChild(this._welcomeLbl);
             this.addChild(this._startBtn);
             this._startBtn.on("click", function () {
