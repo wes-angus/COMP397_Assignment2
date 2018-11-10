@@ -1,7 +1,7 @@
 module config {
     export enum ActionEnum {
-        Forward,
-        Backward,
+        Up,
+        Down,
         Right,
         Left,
         Shoot

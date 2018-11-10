@@ -73,20 +73,26 @@ module objects {
 
         private resolveCollision(other: GameObject): void {
             other.IsColliding = true;
-            let sound: createjs.AbstractSoundInstance;
 
             switch (other.name) {
                 case "coin":
-                    sound = createjs.Sound.play("coinSound", { volume: 0.1 });
+                    createjs.Sound.play("coinSound", { volume: 0.1 });
                     managers.Game.scoreBoard.Score += 100;
                     other.Destroy();
+                    managers.Game.scoreBoard.Coins++;
+                    if(managers.Game.scoreBoard.Coins > 49)
+                    {
+                        managers.Game.scoreBoard.Lives++;
+                        managers.Game.scoreBoard.Coins = 0;
+                        createjs.Sound.play("lifeSound", { volume: 0.1 });
+                    }
                     break;
                 case "enemy":
-                    sound = createjs.Sound.play("explodeSound", { volume: 0.1 });
+                    createjs.Sound.play("explodeSound", { volume: 0.1 });
                     managers.Game.scoreBoard.Lives--;
                     break;
                 case "bullet":
-                    sound = createjs.Sound.play("explodeSound", { volume: 0.1 });
+                    createjs.Sound.play("explodeSound", { volume: 0.1 });
                     managers.Game.scoreBoard.Lives--;
                     (<Bullet>other).IsInPlay = false;
                     break;

@@ -16,16 +16,59 @@ var objects;
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         //constructors
-        function Player(x, y) {
+        function Player(x, y, moveStep) {
             if (x === void 0) { x = 45; }
             if (y === void 0) { y = 240; }
+            if (moveStep === void 0) { moveStep = 8; }
             var _this = _super.call(this, "tank", true) || this;
             _this.x = x;
             _this.y = y;
+            _this._moveStep = moveStep;
             _this.Start();
             return _this;
         }
         //private methods
+        Player.prototype._handleInput = function () {
+            if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Up])) {
+                this.y -= this._moveStep;
+            }
+            else if (managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Up])) {
+                this.y -= this._moveStep / 2;
+            }
+            if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Down])) {
+                this.y += this._moveStep;
+            }
+            else if (managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Down])) {
+                this.y += this._moveStep / 2;
+            }
+            if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Left])) {
+                this.x -= this._moveStep / 2;
+            }
+            else if (managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Left])) {
+                this.x -= this._moveStep / 4;
+            }
+            if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Right])) {
+                this.x += this._moveStep / 2;
+            }
+            else if (managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Right])) {
+                this.x += this._moveStep / 4;
+            }
+            if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Shoot])) {
+                //TODO: Do the shooting
+            }
+            if (this.y > 480 - this.HalfHeight + 8) {
+                this.y = 480 - this.HalfHeight + 8;
+            }
+            else if (this.y < this.HalfHeight) {
+                this.y = this.HalfHeight;
+            }
+            if (this.x > 720 - this.HalfWidth) {
+                this.x = 720 - this.HalfWidth;
+            }
+            else if (this.x < this.HalfWidth) {
+                this.x = this.HalfWidth;
+            }
+        };
         //public methods
         Player.prototype.Reset = function () {
         };
@@ -34,20 +77,7 @@ var objects;
         Player.prototype.Start = function () {
         };
         Player.prototype.Update = function () {
-            if (this.y > 480 - this.HalfHeight) {
-                this.y = 480 - this.HalfHeight;
-            }
-            else if (this.y < this.HalfHeight) {
-                this.y = this.HalfHeight;
-            }
-            /*
-            if (this.x > 720 - this.HalfWidth) {
-                this.x = 720 - this.HalfWidth;
-            }
-            else if (this.x < this.HalfWidth) {
-                this.x = this.HalfWidth;
-            }
-            */
+            this._handleInput();
             this._updatePosition();
         };
         return Player;

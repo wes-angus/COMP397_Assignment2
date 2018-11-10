@@ -41,7 +41,7 @@ var objects;
         };
         Ocean.prototype.Start = function () {
             this.Reset();
-            this.__horizontalSpeed = -5; //5px per frame
+            this.__horizontalSpeed = -2; //2px per frame
         };
         Ocean.prototype.Update = function () {
             this._move();

@@ -9,6 +9,7 @@ var managers;
             this.Start();
             this.Lives = livesNum;
             this.Score = scoreNum;
+            this.Coins = scoreNum;
             this.HighScore = highScoreNum;
         }
         Object.defineProperty(ScoreBoard.prototype, "Score", {
@@ -19,12 +20,6 @@ var managers;
             set: function (newVal) {
                 this._score = newVal;
                 this._scoreLabel.text = "Score: " + this._score;
-                /*
-                if(this._score > this._highScore)
-                {
-                    this.HighScore = this._score;
-                }
-                */
             },
             enumerable: true,
             configurable: true
@@ -36,6 +31,17 @@ var managers;
             set: function (newVal) {
                 this._lives = newVal;
                 this._livesLabel.text = "Lives: " + this._lives;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ScoreBoard.prototype, "Coins", {
+            get: function () {
+                return this._coins;
+            },
+            set: function (newVal) {
+                this._coins = newVal;
+                this._coinsLabel.text = "Coins: " + this._coins;
             },
             enumerable: true,
             configurable: true
@@ -58,17 +64,20 @@ var managers;
             if (scoreNum === void 0) { scoreNum = 0; }
             this.Lives = livesNum;
             this.Score = scoreNum;
+            this.Coins = scoreNum;
         };
         ScoreBoard.prototype.AddGameUI = function (curScene) {
             curScene.addChild(this._scoreLabel);
             curScene.addChild(this._livesLabel);
+            curScene.addChild(this._coinsLabel);
         };
         ScoreBoard.prototype.AddHighScore = function (curScene) {
             curScene.addChild(this._highScoreLabel);
         };
         ScoreBoard.prototype.Start = function () {
-            this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 350, 10, false);
+            this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 250, 10, false);
             this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 20, 10, false);
+            this._coinsLabel = new objects.Label("Coins: 99", "30px", "Consolas", "#FFFF00", 540, 10, false);
             this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 360, 160, true);
         };
         return ScoreBoard;

@@ -19,7 +19,7 @@
         { id: "ocean", src: "./Assets/images/ocean.gif" },
         { id: "ocean_h", src: "./Assets/images/ocean_h.gif" },
         { id: "engineSound", src: "./Assets/audio/engine.ogg" },
-        { id: "bullet", src: "./Assets/images/bullet.png" },
+        { id: "bullet", src: "./Assets/images/bullet1.png" },
         { id: "bulletSound", src: "./Assets/audio/bullet.mp3" },
         { id: "explodeSound", src: "./Assets/audio/explosion.mp3" },
         { id: "coinSound", src: "./Assets/audio/coin.wav" },
@@ -42,6 +42,12 @@
         stage.enableMouseOver(20);
         createjs.Ticker.framerate = 60;
         createjs.Ticker.on("tick", Update);
+        document.addEventListener("keydown", (event) => {
+            managers.Input.HandleInput(event);
+        });
+        document.addEventListener("keyup", (event) => {
+            managers.Input.HandleUpInput(event);
+        });
 
         //Setup global scoreboard and UI
         scoreBoard = new managers.ScoreBoard();
@@ -61,7 +67,7 @@
             curState = managers.Game.curState;
             Main();
         }
-        
+
         stage.update();
     }
 
@@ -81,7 +87,7 @@
                 curScene = new scenes.Over();
                 break;
         }
-        
+
         stage.addChild(curScene);
     }
 

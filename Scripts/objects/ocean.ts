@@ -31,7 +31,7 @@ module objects {
         }
         public Start(): void {
             this.Reset();
-            this.__horizontalSpeed = -5; //5px per frame
+            this.__horizontalSpeed = -2; //2px per frame
         }
         public Update(): void {
             this._move();
