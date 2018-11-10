@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>COMP397 - Lesson 1</title>
+    <!-- CSS Section -->
+    <link rel="stylesheet" href="./Content/game.css">
+</head>
+<body>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <!--  JavaScript Section  -->
+    <!-- CreateJS Libraries -->
+    <script src="./node_modules/easeljs/lib/easeljs.min.js"></script>
+    <script src="./node_modules/tweenjs/lib/tweenjs.min.js"></script>
+    <script src="./node_modules/soundjs/lib/soundjs.min.js"></script>
+    <script src="./node_modules/preloadjs/lib/preloadjs.min.js"></script>
+
+    <!--  Game Scripts  -->
+    <!-- Config Files -->
+    <script src="./Scripts/config/scene.js"></script>
+
+    <!-- Game Manager -->
+    <script src="./Scripts/managers/game.js"></script>
+
+    <!-- Util Classes -->
+    <script src="./Scripts/util/vector2.js"></script>
+
+    <!-- Main GameObject class -->
+    <script src="./Scripts/objects/gameobject.js"></script>
+
+    <!-- Game Objects -->
+    <script src="./Scripts/objects/label.js"></script>
+    <script src="./Scripts/objects/button.js"></script>
+    <script src="./Scripts/objects/ocean.js"></script>
+    <script src="./Scripts/objects/bullet.js"></script>
+    <script src="./Scripts/objects/player.js"></script>
+    <script src="./Scripts/objects/island.js"></script>
+    <script src="./Scripts/objects/enemy.js"></script>
+    <script src="./Scripts/objects/scene.js"></script>
+
+    <!-- Managers -->
+    <script src="./Scripts/managers/scoreboard.js"></script>
+    <script src="./Scripts/managers/bullet.js"></script>
+    <script src="./Scripts/managers/collision.js"></script>
+
+    <!-- Scenes -->
+    <script src="./Scripts/scenes/over.js"></script>
+    <script src="./Scripts/scenes/level1.js"></script>
+    <script src="./Scripts/scenes/start.js"></script>
+
+    <!-- Core Game Script -->
+    <script src="./Scripts/core/game.js"></script>
+</body>
+</html>
