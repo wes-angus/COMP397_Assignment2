@@ -1,6 +1,5 @@
 module managers {
     export class Input {
-
         public static keys: { [key: string]: boolean } = {}
         public static isKeydown(key: string): boolean {
             return Input.keys[key];

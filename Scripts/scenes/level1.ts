@@ -4,9 +4,10 @@ module scenes {
         //Game objects
         private _player: objects.Player;
         private _ocean: objects.Ocean;
-        private _island: objects.Coin;
+        private _coins: objects.Coin[];
         private _enemy: objects.Enemy;
         private _engineSound: createjs.AbstractSoundInstance;
+        private _coinCount = 3;
 
         private _bulletManager: managers.Bullet;
 
@@ -38,8 +39,8 @@ module scenes {
             //Player object
             this._player = new objects.Player();
 
-            //Island object
-            this._island = new objects.Coin();
+            //Coin array
+            this._coins = [];
 
             //Enemy object
             this._enemy = new objects.Enemy();
@@ -56,9 +57,19 @@ module scenes {
         public Update(): void {
             this._ocean.Update();
             this._player.Update();
-            this._island.Update();
+            if(this._coins.length < this._coinCount)
+            {
+                if(createjs.Ticker.getTicks() % 60 === 0)
+                {
+                    this._coins.push(new objects.Coin());
+                    this.addChild(this._coins[this._coins.length- 1]);
+                }
+            }
+            this._coins.forEach(coin => {
+                coin.Update();
+                this._player.checkIntersectionNotCentered(coin);
+            });
             this._enemy.Update();
-            this._player.checkIntersectionNotCentered(this._island);
             this._player.checkIntersection(this._enemy);
 
             this._bulletManager.Update();
@@ -72,7 +83,6 @@ module scenes {
 
         public Main(): void {
             this.addChild(this._ocean);
-            this.addChild(this._island);
             this.addChild(this._enemy);
             this.addChild(this._player);
             //Add each bullet in the array to the scene

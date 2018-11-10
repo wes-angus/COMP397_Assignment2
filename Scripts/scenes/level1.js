@@ -19,6 +19,7 @@ var scenes;
         //constructor
         function Level1() {
             var _this = _super.call(this) || this;
+            _this._coinCount = 3;
             _this.Start();
             return _this;
         }
@@ -36,8 +37,8 @@ var scenes;
             this._ocean = new objects.Ocean();
             //Player object
             this._player = new objects.Player();
-            //Island object
-            this._island = new objects.Coin();
+            //Coin array
+            this._coins = [];
             //Enemy object
             this._enemy = new objects.Enemy();
             this._engineSound = createjs.Sound.play("engineSound", { volume: 0.067, loop: -1 });
@@ -50,9 +51,17 @@ var scenes;
             var _this = this;
             this._ocean.Update();
             this._player.Update();
-            this._island.Update();
+            if (this._coins.length < this._coinCount) {
+                if (createjs.Ticker.getTicks() % 60 === 0) {
+                    this._coins.push(new objects.Coin());
+                    this.addChild(this._coins[this._coins.length - 1]);
+                }
+            }
+            this._coins.forEach(function (coin) {
+                coin.Update();
+                _this._player.checkIntersectionNotCentered(coin);
+            });
             this._enemy.Update();
-            this._player.checkIntersectionNotCentered(this._island);
             this._player.checkIntersection(this._enemy);
             this._bulletManager.Update();
             this._bulletManager.Bullets.forEach(function (bullet) {
@@ -65,7 +74,6 @@ var scenes;
         Level1.prototype.Main = function () {
             var _this = this;
             this.addChild(this._ocean);
-            this.addChild(this._island);
             this.addChild(this._enemy);
             this.addChild(this._player);
             //Add each bullet in the array to the scene

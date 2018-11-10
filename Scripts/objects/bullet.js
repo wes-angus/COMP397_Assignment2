@@ -53,7 +53,7 @@ var objects;
             this.y = this.Position.y;
         };
         Bullet.prototype._checkBounds = function () {
-            if (this.Position.x > 1440 + this.HalfHeight || this.Position.x < -this.HalfHeight) {
+            if (this.Position.x > 720 + this.HalfHeight || this.Position.x < -this.HalfHeight) {
                 this.Direction = util.Vector2.zero();
                 this.IsInPlay = false;
             }

@@ -46,7 +46,7 @@ module objects {
                 this.Reset();
             }
 
-            if ((createjs.Ticker.getTicks() % 20 == 0) && (this.x < 1440)) {
+            if ((createjs.Ticker.getTicks() % 20 == 0) && (this.x < 720 + this.Height)) {
                 managers.Game.bulletManager.FireBullet(
                     util.Vector2.Add(this.Position, this._bulletSpawn),
                     util.Vector2.left()

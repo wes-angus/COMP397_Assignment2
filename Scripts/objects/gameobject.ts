@@ -80,7 +80,7 @@ module objects {
                     managers.Game.scoreBoard.Score += 50;
                     other.Destroy();
                     managers.Game.scoreBoard.Coins++;
-                    if (managers.Game.scoreBoard.Coins > 49) {
+                    if (managers.Game.scoreBoard.Coins > 99) {
                         managers.Game.scoreBoard.Lives++;
                         managers.Game.scoreBoard.Coins = 0;
                         createjs.Sound.play("lifeSound", { volume: 0.1 });
