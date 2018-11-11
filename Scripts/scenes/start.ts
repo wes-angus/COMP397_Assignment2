@@ -53,7 +53,7 @@ module scenes {
                 managers.Game.curState = config.Scene.INSTRUCTIONS;
             });
             this._exitBtn.on("click", () => {
-                managers.Game.curState = config.Scene.OVER;
+                window.open("https://cheeseless.github.io/comp397-group-project/");
             });
         }
     }

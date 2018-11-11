@@ -47,7 +47,7 @@ module objects {
             this.y = this.Position.y;
         }
         _checkBounds(): void {
-            if (this.Position.x > 720 + this.HalfHeight || this.Position.x < -this.HalfHeight) {
+            if (this.x > 720 + this.HalfHeight || this.x < -this.HalfHeight) {
                 this.Direction = util.Vector2.zero();
                 this.IsInPlay = false;
             }
@@ -58,6 +58,7 @@ module objects {
             this.Owner = "";
             this.x = -10000;
             this.y = -10000;
+            this._updatePosition();
             this.Direction = util.Vector2.zero();
             this.IsColliding = false;
         }

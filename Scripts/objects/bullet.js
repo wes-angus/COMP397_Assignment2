@@ -63,7 +63,7 @@ var objects;
             this.y = this.Position.y;
         };
         Bullet.prototype._checkBounds = function () {
-            if (this.Position.x > 720 + this.HalfHeight || this.Position.x < -this.HalfHeight) {
+            if (this.x > 720 + this.HalfHeight || this.x < -this.HalfHeight) {
                 this.Direction = util.Vector2.zero();
                 this.IsInPlay = false;
             }
@@ -73,6 +73,7 @@ var objects;
             this.Owner = "";
             this.x = -10000;
             this.y = -10000;
+            this._updatePosition();
             this.Direction = util.Vector2.zero();
             this.IsColliding = false;
         };
