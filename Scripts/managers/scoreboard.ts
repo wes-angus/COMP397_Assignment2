@@ -44,6 +44,7 @@ module managers {
         }
         set HighScore(newVal: number) {
             this._highScore = newVal;
+            managers.Cookie.setCookie("highScore", this._highScore);
             this._highScoreLabel.text = "High Score: " + this._highScore;
         }
 
@@ -54,8 +55,7 @@ module managers {
             this._remainingEnemies = newVal;
             this._enemiesLabel.text = "Remaining: " + this._remainingEnemies;
             if (this._remainingEnemies < 1) {
-                managers.Game.scoreBoard.Score += 5000;
-                managers.Game.scoreBoard.Score += this.Coins * 100;
+                managers.Game.scoreBoard.Score += 5000 + (this.Coins * 100) + (this.Lives * 1000);
                 this.Coins = 0;
                 this._win = true;
                 managers.Game.curState = config.Scene.OVER;
@@ -76,13 +76,22 @@ module managers {
             this.Lives = livesNum;
             this.Score = scoreNum;
             this.Coins = scoreNum;
-            this.HighScore = highScoreNum;
+            this._initHighScore(highScoreNum);
             this._remainingEnemies = 99;
         }
 
         //private methods
+        private _initHighScore(highScoreNum: number) {
+            let hsString: string = managers.Cookie.getCookie("highScore");
+            if (hsString !== "") {
+                this.HighScore = parseInt(hsString);
+                console.log("Got high score: ", this.HighScore);
+            }
+            else {
+                this.HighScore = highScoreNum;
+            }
+        }
 
-        //public methods
         public Reset(livesNum: number = 7, scoreNum: number = 0) {
             this.Lives = livesNum;
             this.Score = scoreNum;
