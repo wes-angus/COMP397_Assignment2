@@ -86,6 +86,8 @@ module scenes {
 
             this._bulletManager.Update();
             this._bulletManager.Bullets.forEach(bullet => {
+                /* Check if the bullet is active and whether it came from
+                the player or an enemy to prevent unneeded collision checks */
                 if (bullet.IsInPlay) {
                     if (bullet.Owner === "enemy") {
                         this._player.checkIntersection(bullet);
