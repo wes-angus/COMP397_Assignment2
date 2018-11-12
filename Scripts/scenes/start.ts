@@ -1,3 +1,4 @@
+//Main start scene class
 module scenes {
     export class Start extends objects.Scene {
         //private inst. vars
@@ -46,13 +47,16 @@ module scenes {
             this.addChild(this._howToBtn);
             this.addChild(this._exitBtn);
 
+            //Start game
             this._startBtn.on("click", () => {
                 managers.Game.curState = config.Scene.LEVEL1;
             });
+            //Go to instructions screen
             this._howToBtn.on("click", () => {
                 managers.Game.curState = config.Scene.INSTRUCTIONS;
             });
             this._exitBtn.on("click", () => {
+                //Opens link to main "Tortuga no Sensō" game
                 window.open("https://cheeseless.github.io/comp397-group-project/");
             });
         }

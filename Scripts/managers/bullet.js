@@ -40,6 +40,7 @@ var managers;
         });
         //private methods
         Bullet.prototype._nextBullet = function () {
+            //Advance the index to the next bullet in the array
             this._currentBulletIndex++;
             if (this._currentBulletIndex >= this._bullets.length) {
                 this._currentBulletIndex = 0;

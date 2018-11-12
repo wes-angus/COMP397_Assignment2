@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+//Enemy class
 var objects;
 (function (objects) {
     var Enemy = /** @class */ (function (_super) {
@@ -32,6 +33,7 @@ var objects;
             get: function () {
                 return this._health;
             },
+            //Manage health of enemies and kill them if it drops to 0
             set: function (newHealth) {
                 this._health = newHealth;
                 if (this._health === 0) {
@@ -42,6 +44,7 @@ var objects;
             configurable: true
         });
         //private methods
+        //Handle enemy-bullet collisions
         Enemy.prototype.resolveCollision = function (other) {
             switch (other.name) {
                 case "bullet":
@@ -57,6 +60,7 @@ var objects;
             this.y += this._verticalSpeed;
             this._updatePosition();
         };
+        //Bounce back or reset the player if it hits the edge of the screen
         Enemy.prototype._checkBounds = function () {
             if (this.x < -this.Width) {
                 this.Reset();
@@ -69,10 +73,13 @@ var objects;
                 this.y = 480 - this.HalfHeight;
                 this._verticalSpeed *= -1;
             }
-            if ((this.x < 720 + this.HalfHeight)) {
-                if (createjs.Ticker.getTicks() > this._shootFrame) {
-                    this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
-                    managers.Game.bulletManager.FireBullet(util.Vector2.Add(this.Position, this._bulletSpawn), util.Vector2.left(), "enemy");
+            //Fire bullet to the left if enemy is not dead, and enough time has passed since the last shot
+            if (this.Health > 0) {
+                if ((this.x < 720 + this.HalfHeight)) {
+                    if (createjs.Ticker.getTicks() > this._shootFrame) {
+                        this._shootFrame = createjs.Ticker.getTicks() + this._shotDelay;
+                        managers.Game.bulletManager.FireBullet(util.Vector2.Add(this.Position, this._bulletSpawn), util.Vector2.left(), "enemy");
+                    }
                 }
             }
         };
@@ -87,6 +94,7 @@ var objects;
             this._updatePosition();
             this.alpha = 1;
         };
+        //Increase score and update number of remaining enemies upon death 
         Enemy.prototype.Destroy = function () {
             console.log("Killed Enemy!");
             managers.Game.scoreBoard.Score += 150;

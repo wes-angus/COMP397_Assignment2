@@ -1,3 +1,4 @@
+//Game over scene class
 module scenes {
     export class Over extends objects.Scene {
         //private inst. vars
@@ -42,6 +43,7 @@ module scenes {
             this.addChild(this._restartBtn);
             this.addChild(this._menuBtn);
 
+            //Restart level or go back to main menu on button click
             this._restartBtn.on("click", () => {
                 managers.Game.curState = config.Scene.LEVEL1;
                 managers.Game.scoreBoard.Reset();

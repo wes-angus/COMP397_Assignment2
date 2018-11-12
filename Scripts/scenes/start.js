@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+//Main start scene class
 var scenes;
 (function (scenes) {
     var Start = /** @class */ (function (_super) {
@@ -49,13 +50,16 @@ var scenes;
             this.addChild(this._startBtn);
             this.addChild(this._howToBtn);
             this.addChild(this._exitBtn);
+            //Start game
             this._startBtn.on("click", function () {
                 managers.Game.curState = config.Scene.LEVEL1;
             });
+            //Go to instructions screen
             this._howToBtn.on("click", function () {
                 managers.Game.curState = config.Scene.INSTRUCTIONS;
             });
             this._exitBtn.on("click", function () {
+                //Opens link to main "Tortuga no Sensō" game
                 window.open("https://cheeseless.github.io/comp397-group-project/");
             });
         };

@@ -1,3 +1,4 @@
+//Player class
 module objects {
     export class Player extends objects.GameObject {
         private _moveStep: number;
@@ -21,6 +22,7 @@ module objects {
         }
 
         //private methods
+        //Function for damaging the player and triggering the start of their invinciblity period
         private takeDamage(): void {
             createjs.Sound.play("explodeSound", { volume: 0.1 });
             managers.Game.scoreBoard.Lives--;
@@ -28,12 +30,14 @@ module objects {
             this.alpha = 0.5;
             this._invincibleFrame = createjs.Ticker.getTicks() + this._invincibleDelay;
         }
+        //Function for handling collision between the player and other objects
         protected resolveCollision(other: GameObject): void {
             if (!this._invincible || other.name === "coin") {
                 super.resolveCollision(other);
             }
 
             switch (other.name) {
+                //Increas coin count and award extra life if enough coins are collected
                 case "coin":
                     createjs.Sound.play("coinSound", { volume: 0.1 });
                     managers.Game.scoreBoard.Score += 50;
@@ -47,6 +51,7 @@ module objects {
                     }
                     break;
                 case "enemy":
+                    //Ignore obstacles when invincible
                     if (!this._invincible) {
                         this.takeDamage();
                     }
@@ -59,6 +64,7 @@ module objects {
                     break;
             }
 
+            //If game has ended, move to the game over screen and update the high score if need be
             if (managers.Game.scoreBoard.Lives < 1) {
                 managers.Game.curState = config.Scene.OVER;
                 if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
@@ -67,6 +73,7 @@ module objects {
             }
         }
 
+        //Function to apply keyboard input to the player
         private _handleInput() {
             if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Up])) {
                 this.y -= this._moveStep;
@@ -94,6 +101,7 @@ module objects {
                 this.x += this._moveStep / 4;
             }
 
+            //If enough time has passed between shots  and the button is held down, fire a bullet
             if (createjs.Ticker.getTicks() > this._shootFrame) {
                 if (managers.Input.isKeydown(config.INPUT_KEY[0][config.ActionEnum.Shoot]) ||
                     managers.Input.isKeydown(config.INPUT_KEY[1][config.ActionEnum.Shoot])) {
@@ -105,6 +113,11 @@ module objects {
                 }
             }
 
+            this._checkBounds();
+        }
+
+        //Function that stops the player from moving off screen
+        private _checkBounds(): void {
             if (this.y > 480 - this.HalfHeight + 8) {
                 this.y = 480 - this.HalfHeight + 8;
             }
@@ -131,6 +144,7 @@ module objects {
         }
         public Update(): void {
             if (this._invincible) {
+                //Reset the player's invincibility once the period is done
                 if (createjs.Ticker.getTicks() > this._invincibleFrame) {
                     this.alpha = 1;
                     this._invincible = false;

@@ -1,3 +1,12 @@
+/**
+ * Author: Wesley Angus
+ * Student #: 300924221
+ * Description: A tank-based, side-scrolling space shooter -
+ * see "Instructions" for more background and controls for the game.
+ * Last Modified by: Wesley Angus
+ * Date Last Modified: Nov 09 2018
+ * Revision History: see https://github.com/wes-angus/COMP397_Assignment2
+ */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||

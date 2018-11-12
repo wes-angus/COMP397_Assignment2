@@ -1,5 +1,7 @@
+//Manager class with static functions for working with cookies
 module managers {
     export class Cookie {
+        //Initialize/update cookie on the page
         public static setCookie(property: string, value: any) {
             let d: Date = new Date();
             d.setTime(d.getTime() + (10 * 365 * 24 * 60 * 60 * 1000));
@@ -9,6 +11,7 @@ module managers {
         }
 
         //public methods
+        //Retrieve cookie from the browser and get the specified property
         public static getCookie(property: string): string {
             var name = property + "=";
             var decodedCookie = decodeURIComponent(document.cookie);

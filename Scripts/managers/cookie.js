@@ -1,8 +1,10 @@
+//Manager class with static functions for working with cookies
 var managers;
 (function (managers) {
     var Cookie = /** @class */ (function () {
         function Cookie() {
         }
+        //Initialize/update cookie on the page
         Cookie.setCookie = function (property, value) {
             var d = new Date();
             d.setTime(d.getTime() + (10 * 365 * 24 * 60 * 60 * 1000));
@@ -11,6 +13,7 @@ var managers;
             console.log("Saved cookie: ", document.cookie);
         };
         //public methods
+        //Retrieve cookie from the browser and get the specified property
         Cookie.getCookie = function (property) {
             var name = property + "=";
             var decodedCookie = decodeURIComponent(document.cookie);

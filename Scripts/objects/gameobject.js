@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+//Main game object class
 var objects;
 (function (objects) {
     var GameObject = /** @class */ (function (_super) {
@@ -97,7 +98,7 @@ var objects;
         GameObject.prototype.resolveCollision = function (other) {
             other.IsColliding = true;
         };
-        //Collision functions assume object checking against others (e.g. player) is centered
+        //Collision functions (AABB)
         //Assumes other object is centered
         GameObject.prototype.checkIntersection = function (other) {
             if (!other.IsColliding) {
@@ -117,16 +118,6 @@ var objects;
                     this.y - this.HalfHeight < other.y + other.Height &&
                     this.y + this.HalfHeight > other.y) {
                     this.resolveCollision(other);
-                }
-            }
-        };
-        GameObject.prototype.checkCollision = function (object2) {
-            if (!object2.IsColliding) {
-                var distance = util.Vector2.Dist(this.Position, object2.Position);
-                var totalHeight = this.HalfHeight + object2.HalfHeight;
-                // check if this object is colliding with object 2
-                if (distance < totalHeight) {
-                    this.resolveCollision(object2);
                 }
             }
         };

@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+//Bullet class
 var objects;
 (function (objects) {
     var Bullet = /** @class */ (function (_super) {
@@ -46,6 +47,7 @@ var objects;
             configurable: true
         });
         Object.defineProperty(Bullet.prototype, "Owner", {
+            //Track the owner of the bullet to limit checking collision against other objects only
             get: function () {
                 return this._owner;
             },

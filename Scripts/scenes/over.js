@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+//Game over scene class
 var scenes;
 (function (scenes) {
     var Over = /** @class */ (function (_super) {
@@ -46,6 +47,7 @@ var scenes;
             this.addChild(this._gameOverLbl);
             this.addChild(this._restartBtn);
             this.addChild(this._menuBtn);
+            //Restart level or go back to main menu on button click
             this._restartBtn.on("click", function () {
                 managers.Game.curState = config.Scene.LEVEL1;
                 managers.Game.scoreBoard.Reset();

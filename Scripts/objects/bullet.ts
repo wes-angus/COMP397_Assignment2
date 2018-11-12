@@ -1,3 +1,4 @@
+//Bullet class
 module objects {
     export class Bullet extends objects.GameObject {
         //private vars
@@ -26,6 +27,7 @@ module objects {
             this._vel = util.Vector2.Mult(this.Direction, this._speed);
         }
 
+        //Track the owner of the bullet to limit checking collision against other objects only
         get Owner(): string {
             return this._owner;
         }

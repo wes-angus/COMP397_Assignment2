@@ -1,3 +1,4 @@
+//Main game object class
 module objects {
     export abstract class GameObject extends createjs.Bitmap {
         //private inst. vars
@@ -75,7 +76,7 @@ module objects {
             other.IsColliding = true;
         }
 
-        //Collision functions assume object checking against others (e.g. player) is centered
+        //Collision functions (AABB)
         //Assumes other object is centered
         public checkIntersection(other: GameObject): void {
             if (!other.IsColliding) {
@@ -95,18 +96,6 @@ module objects {
                     this.y - this.HalfHeight < other.y + other.Height &&
                     this.y + this.HalfHeight > other.y) {
                     this.resolveCollision(other);
-                }
-            }
-        }
-
-        public checkCollision(object2: objects.GameObject): void {
-            if (!object2.IsColliding) {
-                let distance = util.Vector2.Dist(this.Position, object2.Position);
-                let totalHeight = this.HalfHeight + object2.HalfHeight;
-
-                // check if this object is colliding with object 2
-                if (distance < totalHeight) {
-                    this.resolveCollision(object2);
                 }
             }
         }

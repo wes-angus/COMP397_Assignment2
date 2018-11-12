@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+//Main level scene class
 var scenes;
 (function (scenes) {
     var Level1 = /** @class */ (function (_super) {
@@ -34,7 +35,6 @@ var scenes;
         Level1.prototype.Destroy = function () {
             this.removeAllChildren();
             this._music.stop();
-            //TODO: Clean up bullet mananger
         };
         Level1.prototype.Start = function () {
             //Ocean background
@@ -53,6 +53,7 @@ var scenes;
         };
         Level1.prototype.Update = function () {
             var _this = this;
+            //Update all game objects in the level and check collisions between certain ones
             this._space.Update();
             this._player.Update();
             if (this._coins.length < this._coinCount) {
@@ -94,6 +95,7 @@ var scenes;
         Level1.prototype.Main = function () {
             var _this = this;
             this.addChild(this._space);
+            //Set up number of enemies to kill in this level
             managers.Game.scoreBoard.RemainingEnemies = this._startingEnemies;
             managers.Game.scoreBoard.AddGameUI(this);
             this.addChild(this._player);

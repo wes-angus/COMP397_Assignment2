@@ -1,3 +1,4 @@
+//Coin class
 module objects {
     export class Coin extends objects.GameObject {
         //private inst. vars

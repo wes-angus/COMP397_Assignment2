@@ -1,3 +1,14 @@
+/**
+ * Author: Wesley Angus
+ * Student #: 300924221
+ * Description: A tank-based, side-scrolling space shooter - 
+ * see "Instructions" for more background and controls for the game.
+ * Last Modified by: Wesley Angus
+ * Date Last Modified: Nov 10 2018
+ * Revision History: see https://github.com/wes-angus/COMP397_Assignment2
+ */
+
+//Instructions scene class
 module scenes {
     export class Instructions extends objects.Scene {
         //private inst. vars
@@ -17,6 +28,7 @@ module scenes {
         get ShowControls(): boolean {
             return this._showControls;
         }
+        //Toggle showing the controls or the background/goal of the game
         set ShowControls(newVal: boolean) {
             this._showControls = newVal;
             if (this._showControls) {

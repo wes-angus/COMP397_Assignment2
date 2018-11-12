@@ -1,6 +1,7 @@
 //Music: Wonderland (Instrumental) by Dexter Britain
 //Source: https://dexterbritain.com/
 
+//Main level scene class
 module scenes {
     export class Level1 extends objects.Scene {
         //private inst. vars
@@ -34,7 +35,6 @@ module scenes {
         public Destroy(): void {
             this.removeAllChildren();
             this._music.stop();
-            //TODO: Clean up bullet mananger
         }
 
         public Start(): void {
@@ -60,6 +60,7 @@ module scenes {
         }
 
         public Update(): void {
+            //Update all game objects in the level and check collisions between certain ones
             this._space.Update();
             this._player.Update();
             if (this._coins.length < this._coinCount) {
@@ -102,6 +103,7 @@ module scenes {
 
         public Main(): void {
             this.addChild(this._space);
+            //Set up number of enemies to kill in this level
             managers.Game.scoreBoard.RemainingEnemies = this._startingEnemies;
             managers.Game.scoreBoard.AddGameUI(this);
             this.addChild(this._player);            

@@ -1,3 +1,12 @@
+/**
+ * Author: Wesley Angus
+ * Student #: 300924221
+ * Description: A tank-based, side-scrolling space shooter -
+ * see "Instructions" for more background and controls for the game.
+ * Last Modified by: Wesley Angus
+ * Date Last Modified: Nov 11 2018
+ * Revision History: see https://github.com/wes-angus/COMP397_Assignment2
+ */
 var managers;
 (function (managers) {
     var ScoreBoard = /** @class */ (function () {
@@ -53,7 +62,7 @@ var managers;
             },
             set: function (newVal) {
                 this._highScore = newVal;
-                managers.Cookie.setCookie("highScore", this._highScore);
+                managers.Cookie.setCookie("highScore", this._highScore); //Save high score in a cookie
                 this._highScoreLabel.text = "High Score: " + this._highScore;
             },
             enumerable: true,
@@ -67,6 +76,7 @@ var managers;
                 this._remainingEnemies = newVal;
                 this._enemiesLabel.text = "Remaining: " + this._remainingEnemies;
                 if (this._remainingEnemies < 1) {
+                    //If the player has won, add a bonus to their score
                     managers.Game.scoreBoard.Score += 5000 + (this.Coins * 100) + (this.Lives * 1000);
                     this.Coins = 0;
                     this._win = true;
@@ -88,6 +98,7 @@ var managers;
         });
         //private methods
         ScoreBoard.prototype._initHighScore = function (highScoreNum) {
+            //Get high score from the cookie, or initialize it if no cookie is found
             var hsString = managers.Cookie.getCookie("highScore");
             if (hsString !== "") {
                 this.HighScore = parseInt(hsString);
@@ -102,9 +113,10 @@ var managers;
             if (scoreNum === void 0) { scoreNum = 0; }
             this.Lives = livesNum;
             this.Score = scoreNum;
-            this.Coins %= 25;
+            this.Coins %= 25; //Keep some coins to make winning after death slightly easier
         };
         ScoreBoard.prototype.AddGameUI = function (curScene) {
+            //Add the UI to the main game scene
             curScene.addChild(this._scoreLabel);
             curScene.addChild(this._livesLabel);
             curScene.addChild(this._coinsLabel);

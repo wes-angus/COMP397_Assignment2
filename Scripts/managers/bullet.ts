@@ -36,6 +36,7 @@ module managers {
 
         //private methods
         private _nextBullet() {
+            //Advance the index to the next bullet in the array
             this._currentBulletIndex++;
             if (this._currentBulletIndex >= this._bullets.length) {
                 this._currentBulletIndex = 0;
